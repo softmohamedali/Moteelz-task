@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moteelz/core/ui/app_colors.dart';
+import 'package:moteelz/core/ui/app_font.dart';
+import 'package:moteelz/presentation/widgets/m_text.dart';
 
 class CustomStepper extends StatelessWidget {
   final int currentStep;
@@ -10,7 +13,7 @@ class CustomStepper extends StatelessWidget {
     Key? key,
     required this.currentStep,
     required this.steps,
-    this.activeColor = const Color(0xFF8B5CF6), // Purple color
+    this.activeColor = AppColors.primary, // Purple color
     this.inactiveColor = const Color(0xFFE5E7EB), // Light gray
   }) : assert(steps.length == 2, 'This CustomStepper is designed for exactly 2 steps'),
         super(key: key);
@@ -22,6 +25,7 @@ class CustomStepper extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Step 2
             Expanded(
@@ -32,52 +36,45 @@ class CustomStepper extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: currentStep >= 1 ? activeColor : inactiveColor,
+                      color: currentStep >= 1 ? activeColor : activeColor.withAlpha(50),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
-                      child: Text(
-                        '2',
-                        style: TextStyle(
-                          color: currentStep >= 1 ? Colors.white : const Color(0xFF6B7280),
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: MText(
+                        value: '1',
+                        color: currentStep >= 1 ? Colors.white : AppColors.primary,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    steps[0],
-                    style: TextStyle(
-                      color: currentStep >= 1 ? activeColor : const Color(0xFF6B7280),
-                      fontWeight: currentStep >= 1 ? FontWeight.bold : FontWeight.normal,
-                    ),
+                  MText(
+                    value: steps[0],
+                    color: Colors.black,
+                    fontWeight: currentStep >=1 ? FontWeight.bold : FontWeight.normal,
                   ),
                 ],
               ),
             ),
-
-            // Connecting line
             Expanded(
               flex: 2,
               child: Container(
                 height: 40,
                 child: Stack(
-                  alignment: Alignment.center,
+                  alignment: Alignment.topCenter,
                   children: [
-                    // Base line (inactive)
                     Container(
-                      height: 4,
+                      height: 8,
                       color: inactiveColor,
                     ),
-                    // Progress line (active)
+                    // Progress line (active) - Modified for RTL progress
                     ClipPath(
-                      clipper: SteeperLineClipper(
+                      clipper: RTLSteeperLineClipper(
                         currentStep == 0 ? 0.0 :
                         currentStep == 1 ? 0.5 : 1.0,
                       ),
                       child: Container(
-                        height: 4,
+                        height: 8,
                         color: activeColor,
                       ),
                     ),
@@ -95,26 +92,23 @@ class CustomStepper extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: currentStep >= 0 ? activeColor : inactiveColor,
+                      color: currentStep == 2 ? activeColor : activeColor.withAlpha(50),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
-                      child: Text(
-                        '1',
-                        style: TextStyle(
-                          color: currentStep >= 0 ? Colors.white : const Color(0xFF6B7280),
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: MText(
+                        value: '2',
+                        color: currentStep == 2 ? Colors.white : AppColors.primary,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    steps[1],
-                    style: TextStyle(
-                      color: currentStep >= 0 ? activeColor : const Color(0xFF6B7280),
-                      fontWeight: currentStep >= 0 ? FontWeight.bold : FontWeight.normal,
-                    ),
+                  MText(
+                    value: steps[1],
+                    color: currentStep ==2 ?  Colors.black : AppColors.primry_gray_txt,
+                    fontWeight: currentStep ==2 ? FontWeight.bold : FontWeight.normal,
+                    fontFamily: AppFont.fontBold,
                   ),
                 ],
               ),
@@ -126,25 +120,26 @@ class CustomStepper extends StatelessWidget {
   }
 }
 
-// Custom clipper for creating a steeper line
-class SteeperLineClipper extends CustomClipper<Path> {
+// Custom clipper for creating a steeper line with Right-to-Left progress
+class RTLSteeperLineClipper extends CustomClipper<Path> {
   final double progressPercentage;
 
-  SteeperLineClipper(this.progressPercentage);
+  RTLSteeperLineClipper(this.progressPercentage);
 
   @override
   Path getClip(Size size) {
     final path = Path();
 
-    path.moveTo(0, 0);
+    // Start from the right side for RTL
+    path.moveTo(size.width, 0);
 
     // Calculate how much of the width to fill based on progress
-    final fillWidth = size.width * progressPercentage;
+    final fillWidth = size.width * (1 - progressPercentage);
 
-    // Create a steeper line by adjusting the Y position
-    path.lineTo(fillWidth, size.height * 0.1); // Make the line go upward for steeper effect
+    // Create a steeper line from right to left
+    path.lineTo(fillWidth, size.height * 0.1);
     path.lineTo(fillWidth, size.height);
-    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
     path.close();
 
     return path;

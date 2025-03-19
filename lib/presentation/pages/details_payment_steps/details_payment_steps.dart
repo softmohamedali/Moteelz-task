@@ -31,7 +31,7 @@ class DetailsPaymentStepsScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 32),
               child: CustomStepper(
-                currentStep: 2, // 0 for first step
+                currentStep: 1, // 0 for first step
                 steps: ['البطاقة', 'ادفع الآن'],
               ),
             ),
