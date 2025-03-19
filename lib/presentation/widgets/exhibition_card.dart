@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moteelz/core/ui/app_assets.dart';
 
 class ExhibitionCard extends StatelessWidget {
 
@@ -19,7 +20,7 @@ class ExhibitionCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16 * scale),
             color: Colors.blue[700],
             image: const DecorationImage(
-              image: AssetImage("assets/images/card_back.png"),
+              image: AssetImage(AppAssets.cardBack),
               fit: BoxFit.cover,
             ),
           ),

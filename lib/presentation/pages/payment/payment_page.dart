@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/presentation/pages/payment/widgets/payment_card_details.dart';
 import 'package:moteelz/presentation/widgets/dotted_divider.dart';
@@ -82,7 +83,7 @@ class PaymentScreen extends StatelessWidget {
                           Row(
                             textDirection: TextDirection.rtl,
                             children: [
-                              SvgPicture.asset("assets/icons/radio.svg"),
+                              SvgPicture.asset(AppAssets.radio),
                               SizedBox(width: 4,),
                               Expanded(
                                 child: const MText(
@@ -94,7 +95,7 @@ class PaymentScreen extends StatelessWidget {
                                 ),
                               ),
                               Image.asset(
-                                  "assets/images/payments.png",
+                                  AppAssets.payments,
                                   width: Get.width*0.22,
                                   height: 30
                               )

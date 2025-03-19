@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 import 'package:moteelz/presentation/pages/wallet/widgets/wallet_filter_dialog.dart';
 import 'package:moteelz/presentation/pages/wallet/widgets/wallet_item.dart';
@@ -76,7 +77,7 @@ class WalletScreen extends StatelessWidget {
         ),
         child: FilterButton(
           text: 'التصفية',
-          svgString: 'assets/icons/filter.svg',
+          svgString: AppAssets.filter,
           onPressed: (){
             showDialog(
               context: context,

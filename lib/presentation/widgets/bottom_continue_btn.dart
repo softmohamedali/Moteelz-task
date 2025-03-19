@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:moteelz/core/ui/app_assets.dart';
 
 import '../../core/ui/app_colors.dart';
 import '../../core/ui/app_dimen.dart';
@@ -22,7 +23,7 @@ class ContinueButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              "assets/icons/back_arrow.svg",
+              AppAssets.backArrow,
               color: Colors.white,
             ),
             SizedBox(width: AppDimens.h12),

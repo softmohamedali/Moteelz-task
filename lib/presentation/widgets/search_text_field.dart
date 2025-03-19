@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -54,7 +55,7 @@ class SearchTextField extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8,),
-            SvgPicture.asset("assets/icons/search.svg")
+            SvgPicture.asset(AppAssets.search)
           ],
         ),
       ),
