@@ -1,42 +1,59 @@
 import 'package:dartz/dartz.dart';
-import '../../core/error/failure.dart';
-import '../../domain/entity/wallet_entity.dart';
-import '../../domain/repositories/wallet_repository.dart';
-import '../api/wallet_api.dart';
+import 'package:dio/dio.dart';
 
-//basic imp not final
+import '../../core/error/failure.dart';
+import '../../domain/repositories/wallet_repository.dart';
+import '../api/api_client.dart';
+import '../dto/wallet_model.dart';
 
 class WalletRepositoryImpl implements WalletRepository {
-  final WalletApi _walletApi;
+  final ApiClient _apiClient;
 
-  WalletRepositoryImpl(this._walletApi);
+  WalletRepositoryImpl(this._apiClient);
 
   @override
-  Future<Either<Failure, List<WalletEntity>>> getWallets() async {
+  Future<Either<Failure, List<WalletModel>>> getWallets({
+    String? name,
+    double? minPrice,
+    double? maxPrice,
+    int? countryId,
+  }) async {
     try {
-      final response = await _walletApi.getWallets();
-      final wallets = response.data.map((walletModel) {
-        return WalletEntity(
-          id: walletModel.id,
-          name: walletModel.name,
-          availableDays: walletModel.availableDays,
-          numbersOfDays: walletModel.numbersOfDays.map((day) => NumberOfDaysEntity(
-            days: day.days,
-            expiryDays: day.expiryDays,
-            expiryDate: day.expiryDate,
-          )).toList(),
-          price: walletModel.price,
-          currency: walletModel.currency,
-          walletImage: walletModel.walletImage,
-          expiryDate: walletModel.expiryDate,
-          walletCategory: WalletCategoryEntity(name: walletModel.walletCategory.name),
-          featuresFavorites: walletModel.featuresFavorites.map((feature) => FeatureEntity(name: feature.name)).toList(),
-        );
-      }).toList();
-
-      return Right(wallets);
+      final response = await _apiClient.getWallets(
+        name: name,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        countryId: countryId,
+      );
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.message ?? 'Server error'));
     } catch (e) {
-      return Left(ServerFailure('Failed to fetch wallets: $e'));
+      return Left(GeneralFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WalletDetailModel>> getWalletDetails(int id) async {
+    try {
+      final response = await _apiClient.getWalletDetails(id);
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.message ?? 'Server error'));
+    } catch (e) {
+      return Left(GeneralFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CountryModel>>> getCountries() async {
+    try {
+      final response = await _apiClient.getCountries();
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.message ?? 'Server error'));
+    } catch (e) {
+      return Left(GeneralFailure(e.toString()));
     }
   }
 }

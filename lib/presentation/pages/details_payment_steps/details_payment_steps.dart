@@ -1,13 +1,13 @@
 import 'package:context_plus/context_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/presentation/pages/details_payment_steps/widgets/stepper.dart';
 import 'package:moteelz/presentation/pages/payment/payment_page.dart';
+import 'package:signals_flutter/signals_flutter.dart';
 
 import '../details/details_page.dart';
 import 'details_payment_steps_viewmodel.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:signals_flutter/signals_flutter.dart';
 
 final detailsPaymentStepsViewModel = DetailsPaymentStepsViewmodel();
 final stepsViewmodel = Ref<DetailsPaymentStepsViewmodel>();

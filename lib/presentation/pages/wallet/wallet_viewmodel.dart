@@ -2,7 +2,7 @@
 // import 'package:signals/signals_flutter.dart';
 // import 'package:context_plus/context_plus.dart' as cp;
 // import '../../../core/error/failure.dart';
-// import '../../../data/dto/wallet_response.freezed.dart';
+// import '../../../data/dto/wallet_model.dart';
 // import '../../../domain/usecases/get_wallets.dart';
 // class WalletViewModel {
 //   final GetWallets _getWallets;

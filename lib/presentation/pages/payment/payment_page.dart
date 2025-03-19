@@ -2,8 +2,6 @@ import 'package:context_plus/context_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/presentation/pages/payment/widgets/payment_card_details.dart';
