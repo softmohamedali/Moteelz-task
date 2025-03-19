@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/presentation/pages/payment/widgets/payment_card_details.dart';
+import 'package:moteelz/presentation/widgets/dotted_divider.dart';
+import 'package:moteelz/presentation/widgets/moteelz_container_details.dart';
 
 import '../../../core/ui/app_colors.dart';
 import '../../widgets/bottom_continue_btn.dart';
@@ -55,6 +57,10 @@ class PaymentScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     PriceDetailsSection(),
                     SizedBox(height: 20),
+                    DottedDivider(
+                      dashWidth: 3,
+                    ),
+                    SizedBox(height: 30),
                     PaymentMethodSection(),
                     SizedBox(height: 20),
                     CardDetailsSection(),
@@ -88,39 +94,47 @@ class PriceDetailsSection extends StatelessWidget {
           textDirection: TextDirection.rtl,
           color:AppColors.thr_violet_txt ,
         ),
-        Column(
-          children: [
-            const SizedBox(height: 8),
-            _buildPriceRow('5 ليالي', '3,750 ر.س'),
-            _buildPriceRow('ضريبة القيمة المضافة (15%)', '563 ر.س'),
-            const Divider(),
-            _buildPriceRow('المبلغ الإجمالي', '4,313 ر.س', isTotal: true),
-            const Divider(),
-          ],
+        SizedBox(height: AppDimens.h8,),
+        MoteelzContainer(
+          child: Column(
+            children: [
+              const SizedBox(height: 8),
+              _buildPriceRow('5 ليالي', '3,750 ر.س'),
+              _buildPriceRow('ضريبة القيمة المضافة (15%)', '563 ر.س'),
+              DottedDivider(
+                dashWidth: 3,
+              ),
+              _buildPriceRow('المبلغ الإجمالي', '4,313 ر.س', isTotal: true),],
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildPriceRow(String label, String price, {bool isTotal = false}) {
+  Widget _buildPriceRow(
+      String label,
+      String price,
+      {
+        bool isTotal = false,
+      }
+      ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         textDirection: TextDirection.rtl,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            ),
+          MText(
+            value: label,
+            fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+            color: isTotal ? AppColors.thr_violet_txt :AppColors.primry_gray_txt,
+            fontSize: AppDimens.s16,
           ),
-          Text(
-            price,
-            style: TextStyle(
-              color: isTotal ? const Color(0xFF8B5CF6) : Colors.grey,
-              fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            ),
+          MText(
+            value: price,
+            color: isTotal ? AppColors.purple_txt : Colors.grey,
+            fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+            fontSize: AppDimens.s20,
           ),
         ],
       ),
@@ -138,10 +152,12 @@ class PaymentMethodSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          const Text(
-            'بيانات الدفع',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          MText(
+            value: 'بيانات الدفع',
+            fontWeight: FontWeight.bold,
             textDirection: TextDirection.rtl,
+            fontSize: AppDimens.s18,
+            color: AppColors.thr_violet_txt,
           ),
           const SizedBox(height: 16),
           Row(
