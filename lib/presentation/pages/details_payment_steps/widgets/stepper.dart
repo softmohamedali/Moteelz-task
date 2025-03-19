@@ -25,7 +25,6 @@ class CustomStepper extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Step 2
             Expanded(

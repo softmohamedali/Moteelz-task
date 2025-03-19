@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
+import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/core/ui/app_font.dart';
 
 
+import '../../widgets/bottom_continue_btn.dart';
 import '../../widgets/exhibition_card.dart';
 import '../../widgets/m_text.dart';
 import '../details_payment_steps/widgets/stepper.dart';
@@ -14,74 +20,91 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_forward, color: Colors.black),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
-      body:  SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SectionTitle(title: 'المعارض والمؤتمرات'),
-                      SizedBox(height: 16),
-                      MText(
-                        value: '#الأعمال',
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      Container(
-                        width: 150,
-                        height: 100,
-                        child: ExhibitionCard(
-                          cardNumber: '1234 5678 9000 8765',
-                          validThru: "validThru",
-                          daysNumber: "daysNumber",
-                          holderName: 'HOLDER NAME',
-                          cardType: "cardType",
+      backgroundColor: AppColors.back_ground_gray,
+      body:  Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(height: AppDimens.p18),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            MText(
+                              value: 'المعارض والمؤتمرات',
+                              fontSize: AppDimens.s16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.thr_violet_txt,
+                              textAlign: TextAlign.right,
+                            ),
+                            SizedBox(height: AppDimens.h12),
+                            MText(
+                              value: '#الأعمال',
+                              color: AppColors.purple_txt,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 24),
-                      MText(
-                        value: ': اختر عدد الليالي',
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        textAlign: TextAlign.right,
-                      ),
-                      SizedBox(height: 12),
-                      NightsSelector(),
-                      SizedBox(height: 24),
-                      SectionTitle(title: 'وصف البطاقة'),
-                      SizedBox(height: 16),
-                      CardDescription(),
-                      SizedBox(height: 24),
-                      SectionTitle(title: 'مميزات البطاقة'),
-                      SizedBox(height: 16),
-                      CardFeatures(),
-                      SizedBox(height: 24),
-                    ],
-                  ),
+                        SizedBox(width: AppDimens.p8,),
+                        Container(
+                          width: Get.width*0.33,
+                          height: Get.height*0.1,
+                          child: ExhibitionCard(
+                            cardNumber: '1234 5678 9000 8765',
+                            validThru: "validThru",
+                            daysNumber: "daysNumber",
+                            holderName: 'HOLDER NAME',
+                            cardType: "cardType",
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    MText(
+                      value: ': اختر عدد الليالي',
+                      fontSize: AppDimens.s14,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.right,
+                      color: AppColors.thr_violet_txt,
+                    ),
+                    SizedBox(height: 12),
+                    NightsSelector(),
+                    SizedBox(height: 24),
+                    MText(
+                      value:'وصف البطاقة',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.thr_violet_txt,
+                      textAlign: TextAlign.right,
+                    ),
+                    SizedBox(height: 16),
+                    CardDescription(),
+                    SizedBox(height: 24),
+                    MText(
+                      value:'مميزات البطاقة',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.thr_violet_txt,
+                      textAlign: TextAlign.right,
+                    ),
+                    SizedBox(height: 16),
+                    CardFeatures(),
+                    SizedBox(height: 24),
+                  ],
                 ),
               ),
             ),
-            ContinueButton(text: 'المتابعة للدفع'),
-          ],
-        ),
+          ),
+          ContinueButton(text: 'المتابعة للدفع'),
+        ],
       ),
     );
   }
@@ -90,22 +113,6 @@ class DetailsScreen extends StatelessWidget {
 
 
 
-class SectionTitle extends StatelessWidget {
-  final String title;
-
-  const SectionTitle({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MText(
-      value: title,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-      color: Colors.indigo,
-      textAlign: TextAlign.right,
-    );
-  }
-}
 
 class PaymentCard extends StatelessWidget {
   final String cardNumber;
@@ -391,39 +398,3 @@ class FeatureItem extends StatelessWidget {
   }
 }
 
-class ContinueButton extends StatelessWidget {
-  final String text;
-
-  const ContinueButton({Key? key, required this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 56,
-      margin: const EdgeInsets.all(16),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
-          ),
-        ),
-        onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MText(
-              value: text,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            const SizedBox(width: 8),
-            const Icon(Icons.arrow_back, size: 20),
-          ],
-        ),
-      ),
-    );
-  }
-}

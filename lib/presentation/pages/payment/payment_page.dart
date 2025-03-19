@@ -1,107 +1,45 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/ui/app_colors.dart';
+import '../../widgets/bottom_continue_btn.dart';
+
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text('9:41', style: TextStyle(color: Colors.black)),
-        centerTitle: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.arrow_forward, color: Colors.black),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const ProgressIndicator(),
-            const SizedBox(height: 20),
-            const PaymentCard(),
-            const SizedBox(height: 20),
-            const DiscountCodeSection(),
-            const SizedBox(height: 20),
-            const PriceDetailsSection(),
-            const SizedBox(height: 20),
-            const PaymentMethodSection(),
-            const SizedBox(height: 20),
-            const CardDetailsSection(),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const PayNowButton(),
-    );
-  }
-}
-
-class ProgressIndicator extends StatelessWidget {
-  const ProgressIndicator({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return const Scaffold(
+      backgroundColor: AppColors.back_ground_gray,
+      body: Column(
         children: [
-          _buildStep('1', 'البطاقة', true),
-          _buildLine(),
-          _buildStep('2', 'ادفغ الآن', false),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStep(String number, String label, bool isActive) {
-    return Column(
-      children: [
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: isActive ? const Color(0xFF8B5CF6) : const Color(0xFFA78BFA),
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Text(
-              number,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  PaymentCard(),
+                  SizedBox(height: 20),
+                  DiscountCodeSection(),
+                  SizedBox(height: 20),
+                  PriceDetailsSection(),
+                  SizedBox(height: 20),
+                  PaymentMethodSection(),
+                  SizedBox(height: 20),
+                  CardDetailsSection(),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: TextStyle(
-            color: isActive ? Colors.black : Colors.grey,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Arial',
-          ),
-          textAlign: TextAlign.center,
-          textDirection: TextDirection.rtl,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLine() {
-    return Expanded(
-      child: Container(
-        height: 2,
-        color: const Color(0xFFA78BFA),
-        margin: const EdgeInsets.symmetric(horizontal: 8),
+          ContinueButton(text:'إدفع الآن',),
+        ],
       ),
+
     );
   }
 }
+
 
 class PaymentCard extends StatelessWidget {
   const PaymentCard({super.key});
@@ -420,31 +358,3 @@ class CardDetailsSection extends StatelessWidget {
   }
 }
 
-class PayNowButton extends StatelessWidget {
-  const PayNowButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 60,
-      margin: const EdgeInsets.all(16),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF8B5CF6),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
-          ),
-        ),
-        child: const Text(
-          'إدفع الآن',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}

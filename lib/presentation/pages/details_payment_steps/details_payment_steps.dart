@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:moteelz/core/ui/app_colors.dart';
+import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/presentation/pages/details_payment_steps/widgets/stepper.dart';
-import '../../widgets/exhibition_card.dart';
-import '../../widgets/m_text.dart';
+import 'package:moteelz/presentation/pages/payment/payment_page.dart';
+
+import '../details/details_page.dart';
 
 
-class DetailsPaymentStepsScreen extends StatelessWidget {
+class DetailsPaymentStepsScreen extends StatefulWidget {
   const DetailsPaymentStepsScreen({super.key});
 
+  @override
+  State<DetailsPaymentStepsScreen> createState() => _DetailsPaymentStepsScreenState();
+}
+
+class _DetailsPaymentStepsScreenState extends State<DetailsPaymentStepsScreen> {
+
+  int step=1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +37,19 @@ class DetailsPaymentStepsScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 32),
+              padding: EdgeInsets.only(top: AppDimens.p18),
               child: CustomStepper(
-                currentStep: 1, // 0 for first step
+                currentStep: step,
                 steps: ['البطاقة', 'ادفع الآن'],
               ),
             ),
+            const SizedBox(height: 20,),
+            Expanded(
+                child: Container(
+                  child: step==1?
+                  DetailsScreen():PaymentScreen(),
+                )
+            )
           ],
         ),
       ),

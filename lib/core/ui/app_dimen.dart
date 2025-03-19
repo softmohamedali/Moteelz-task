@@ -3,6 +3,7 @@ class AppDimens{
   //height
   static double h8=8;
   static double h10=10;
+  static double h12=12;
   static double h16=16;
 
 
