@@ -1,18 +1,21 @@
+import 'package:context_plus/context_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
-import 'package:moteelz/presentation/pages/details/details_page.dart';
-import 'package:moteelz/presentation/pages/details_payment_steps/details_payment_steps.dart';
-import 'package:moteelz/presentation/pages/payment/payment_page.dart';
 import 'package:moteelz/presentation/pages/wallet/wallet_page.dart';
-import 'core/di/injection.dart' as di;
 
 void main() {
   // di.setupDependencies();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const MyApp());
+  ErrorWidget.builder = ContextPlus.errorWidgetBuilder(ErrorWidget.builder);
+  FlutterError.onError = ContextPlus.onError(FlutterError.onError);
+
+  runApp(
+    ContextPlus.root(child: MyApp(),),
+  );
+
 }
 
 class MyApp extends StatefulWidget {

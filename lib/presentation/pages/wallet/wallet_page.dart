@@ -1,13 +1,18 @@
+import 'package:context_plus/context_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
+import 'package:moteelz/presentation/pages/details_payment_steps/details_payment_steps.dart';
 import 'package:moteelz/presentation/pages/wallet/widgets/wallet_filter_dialog.dart';
 import 'package:moteelz/presentation/pages/wallet/widgets/wallet_item.dart';
 import 'package:moteelz/presentation/widgets/search_text_field.dart';
 
 import '../../../core/ui/app_dimen.dart';
 import '../../widgets/button_text_icon.dart';
+
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
@@ -61,6 +66,7 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 80,
@@ -91,6 +97,7 @@ class WalletScreen extends StatelessWidget {
       body: Padding(
         padding:  const EdgeInsets.all(16.0),
         child: ListView.separated(
+          physics: const ClampingScrollPhysics(),
           itemCount: walletData.length,
           separatorBuilder: (context, index) =>  Container(
             height:AppDimens.h16,
@@ -105,6 +112,9 @@ class WalletScreen extends StatelessWidget {
               cardType: item['cardType'],
               price: (item['price'] as int).toDouble(),
               features: List<String>.from(item['features']),
+              onTap: (){
+                Get.to(()=> DetailsPaymentStepsScreen());
+              },
             );
           },
         ),

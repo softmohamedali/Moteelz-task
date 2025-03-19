@@ -9,33 +9,41 @@ import 'm_text.dart';
 
 class ContinueButton extends StatelessWidget {
   final String text;
+  final GestureTapCallback? onTap;
 
-  const ContinueButton({Key? key, required this.text}) : super(key: key);
+  const ContinueButton({
+    Key? key,
+    required this.text,
+    this.onTap
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 56,
-      child: Container(
-        color: AppColors.primary,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              AppAssets.backArrow,
-              color: Colors.white,
-            ),
-            SizedBox(width: AppDimens.h12),
-            MText(
-              value: text,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        width: double.infinity,
+        height: 56,
+        child: Container(
+          color: AppColors.primary,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                AppAssets.backArrow,
+                color: Colors.white,
+              ),
+              SizedBox(width: AppDimens.h12),
+              MText(
+                value: text,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
 
 
-          ],
+            ],
+          ),
         ),
       ),
     );

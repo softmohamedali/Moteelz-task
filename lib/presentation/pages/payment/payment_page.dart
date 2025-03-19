@@ -1,3 +1,4 @@
+import 'package:context_plus/context_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import '../../widgets/bottom_continue_btn.dart';
 import '../../widgets/m_text.dart';
 import '../../widgets/my_text_field.dart';
 import '../../widgets/solid_button.dart';
+import '../details_payment_steps/details_payment_steps.dart';
 
 
 class PaymentScreen extends StatelessWidget {
@@ -21,17 +23,20 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = stepsViewmodel.bind(context, () => detailsPaymentStepsViewModel);
     return  Scaffold(
       backgroundColor: AppColors.back_ground_gray,
       body: Column(
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(AppDimens.p30),
+              padding: EdgeInsets.symmetric(horizontal:AppDimens.p30),
               child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    SizedBox(height: 20),
                     PaymentCard(),
                     SizedBox(height: 20),
                     const MText(

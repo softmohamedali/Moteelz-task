@@ -1,3 +1,4 @@
+import 'package:context_plus/context_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
@@ -10,19 +11,22 @@ import '../../widgets/bottom_continue_btn.dart';
 import '../../widgets/exhibition_card.dart';
 import '../../widgets/feuture_item.dart';
 import '../../widgets/m_text.dart';
-
+import '../details_payment_steps/details_payment_steps.dart';
+import '../details_payment_steps/details_payment_steps_viewmodel.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = stepsViewmodel.bind(context, () => detailsPaymentStepsViewModel);
     return Scaffold(
       backgroundColor: AppColors.back_ground_gray,
       body:  Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
@@ -122,7 +126,13 @@ class DetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-          ContinueButton(text: 'المتابعة للدفع'),
+          ContinueButton(
+            onTap: (){
+              print("------------------clciked");
+              controller.goNext();
+            },
+              text: 'المتابعة للدفع'
+          ),
         ],
       ),
     );
