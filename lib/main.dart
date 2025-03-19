@@ -3,6 +3,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 import 'package:moteelz/presentation/pages/details/details_page.dart';
+import 'package:moteelz/presentation/pages/details_payment_steps/details_payment_steps.dart';
+import 'package:moteelz/presentation/pages/payment/payment_page.dart';
 import 'package:moteelz/presentation/pages/wallet/wallet_page.dart';
 import 'core/di/injection.dart' as di;
 
@@ -44,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         primaryColor: AppColors.primary,
       ),
-      home:  PaymentScreen(),
+      home:  DetailsPaymentStepsScreen(),
     );
   }
 }

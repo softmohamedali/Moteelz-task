@@ -5,10 +5,11 @@ import 'package:moteelz/core/ui/app_font.dart';
 
 import '../../widgets/exhibition_card.dart';
 import '../../widgets/m_text.dart';
+import '../details_payment_steps/widgets/stepper.dart';
 
 
-class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +31,6 @@ class PaymentScreen extends StatelessWidget {
       body:  SafeArea(
         child: Column(
           children: [
-            StepProgressIndicator(
-              currentStep: 2,
-              totalSteps: 2,
-              labels: ['البطاقة', 'ادفع الآن'],
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -91,81 +87,8 @@ class PaymentScreen extends StatelessWidget {
   }
 }
 
-// Reusable Components
 
-class StepProgressIndicator extends StatelessWidget {
-  final int currentStep;
-  final int totalSteps;
-  final List<String> labels;
 
-  const StepProgressIndicator({
-    Key? key,
-    required this.currentStep,
-    required this.totalSteps,
-    required this.labels,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-      child: Column(
-        children: [
-          Row(
-            children: List.generate(totalSteps, (index) {
-              final isActive = index < currentStep;
-              final isLast = index == totalSteps - 1;
-              return Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 4,
-                        color: isActive ? Colors.deepPurple : Colors.grey.shade200,
-                      ),
-                    ),
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isActive ? Colors.deepPurple : Colors.grey.shade200,
-                      ),
-                      child: Center(
-                        child: MText(
-                          value: '${totalSteps - index}',
-                          color: isActive ? Colors.white : Colors.grey,
-                        ),
-                      ),
-                    ),
-                    if (!isLast)
-                      Expanded(
-                        child: Container(
-                          height: 4,
-                          color: isActive ? Colors.deepPurple : Colors.grey.shade200,
-                        ),
-                      ),
-                  ],
-                ),
-              );
-            }),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              labels.length,
-                  (index) => MText(
-                value: labels[index],
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class SectionTitle extends StatelessWidget {
   final String title;
