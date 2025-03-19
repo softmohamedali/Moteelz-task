@@ -14,7 +14,7 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Sample data for the wallet items
-    final List<Map<String, dynamic>> walletData = [
+    final Map<String, dynamic> walletData =
       {
         'cardNumber': '1234 5678 9009 8765',
         'validThru': '08/25',
@@ -27,35 +27,7 @@ class WalletScreen extends StatelessWidget {
           'الحجز في أكثر من دولة',
           'تثبيت الأسعار طول فترة صلاحية المحفظة',
         ],
-      },
-      {
-        'cardNumber': '9876 5432 1098 7654',
-        'validThru': '10/26',
-        'daysNumber': '5',
-        'holderName': 'AHMAD MOHAMED',
-        'cardType': 'الفنادق والشقق',
-        'price': 2200,
-        'features': [
-          'إهداء الليالي للعائلة والأصدفاء',
-          'الحجز في أكثر من دولة',
-          'خصم 15% على المطاعم',
-        ],
-      },
-      {
-        'cardNumber': '5678 9012 3456 7890',
-        'validThru': '03/27',
-        'daysNumber': '10',
-        'holderName': 'SARA ABDULLAH',
-        'cardType': 'المهرجانات',
-        'price': 3500,
-        'features': [
-          'دخول مجاني للفعاليات',
-          'الحجز في أكثر من دولة',
-          'تثبيت الأسعار طول فترة صلاحية المحفظة',
-          'وجبات مجانية',
-        ],
-      },
-    ];
+      };
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -90,12 +62,12 @@ class WalletScreen extends StatelessWidget {
       body: Padding(
         padding:  const EdgeInsets.all(16.0),
         child: ListView.separated(
-          itemCount: walletData.length,
+          itemCount: 4,
           separatorBuilder: (context, index) =>  Container(
             height:AppDimens.h16,
           ),
           itemBuilder: (context, index) {
-            final item = walletData[index];
+            final item = walletData;
             return WalletItem(
               cardNumber: item['cardNumber'],
               validThru: item['validThru'],

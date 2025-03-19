@@ -4,6 +4,8 @@ import '../../domain/entity/wallet_entity.dart';
 import '../../domain/repositories/wallet_repository.dart';
 import '../api/wallet_api.dart';
 
+//basic imp not final
+
 class WalletRepositoryImpl implements WalletRepository {
   final WalletApi _walletApi;
 

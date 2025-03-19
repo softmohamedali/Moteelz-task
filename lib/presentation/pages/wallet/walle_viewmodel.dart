@@ -4,7 +4,7 @@
 // import '../../../core/error/failure.dart';
 // import '../../../data/dto/wallet_response.freezed.dart';
 // import '../../../domain/usecases/get_wallets.dart';
-// class WalletCoordinator {
+// class WalletViewModel {
 //   final GetWallets _getWallets;
 //
 //   late final Signal<List<Wallet>> wallets = signal([]);

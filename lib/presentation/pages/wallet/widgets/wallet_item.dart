@@ -39,11 +39,6 @@ class WalletItem extends StatelessWidget {
         child: Column(
           children: [
             ExhibitionCard(
-              cardNumber: cardNumber,
-              validThru: validThru,
-              daysNumber: daysNumber,
-              holderName: holderName,
-              cardType: cardType,
             ),
             SizedBox(height: AppDimens.h16),
             Row(

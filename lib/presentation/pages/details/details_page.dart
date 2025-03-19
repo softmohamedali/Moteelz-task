@@ -56,11 +56,6 @@ class DetailsScreen extends StatelessWidget {
                           width: Get.width*0.33,
                           height: Get.height*0.1,
                           child: ExhibitionCard(
-                            cardNumber: '1234 5678 9000 8765',
-                            validThru: "validThru",
-                            daysNumber: "daysNumber",
-                            holderName: 'HOLDER NAME',
-                            cardType: "cardType",
                           ),
                         ),
                       ],
@@ -85,7 +80,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     ReadMoreText(
-                      'منصة "مؤتمرات" العالمية هي الحل المثالي للعائلات التي تبحث عن مرونة وتوفير في السفر مع امكانية قضاء عطلات متعددة في ٣٠ دولة ضمن الدول الرئيسية التي تجعل هذه المنصة خيارة مميزة للأستخدام العائلي مرونة في تواريخ الان. تقدم العائلات عددًا معينًا من الليالي بمراعاة لنفسيه.',
+                      'منصة ',
                       trimMode: TrimMode.Length,
                       trimLines: 5,
                       colorClickableText: Colors.pink,
@@ -136,132 +131,6 @@ class DetailsScreen extends StatelessWidget {
 
 
 
-
-
-class PaymentCard extends StatelessWidget {
-  final String cardNumber;
-  final String holderName;
-  final String expiryDate;
-  final String cardType;
-
-  const PaymentCard({
-    Key? key,
-    required this.cardNumber,
-    required this.holderName,
-    required this.expiryDate,
-    required this.cardType,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF0C3C78), Color(0xFF0D4C9D)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 20,
-            right: 20,
-            child: Row(
-              children: [
-
-                const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: const Icon(Icons.qr_code, color: Colors.white, size: 20),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MText(
-                  value: cardNumber,
-                  color: Colors.white,
-                  fontSize: 16,
-                  textDirection: TextDirection.ltr, // Card number should be LTR
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const MText(
-                          value: 'HOLDER NAME',
-                          color: Colors.white60,
-                          fontSize: 10,
-                          textDirection: TextDirection.ltr,
-                        ),
-                        MText(
-                          value: holderName,
-                          color: Colors.white,
-                          fontSize: 12,
-                          textDirection: TextDirection.ltr,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 40),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const MText(
-                          value: 'VALID THRU',
-                          color: Colors.white60,
-                          fontSize: 10,
-                          textDirection: TextDirection.ltr,
-                        ),
-                        MText(
-                          value: expiryDate,
-                          color: Colors.white,
-                          fontSize: 12,
-                          textDirection: TextDirection.ltr,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 20,
-            left: 20,
-            child: MText(
-              value: cardType,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              textDirection: TextDirection.ltr,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-
-
-
-
-
 class CardFeatures extends StatelessWidget {
   const CardFeatures({Key? key}) : super(key: key);
 
@@ -270,11 +139,6 @@ class CardFeatures extends StatelessWidget {
     return Column(
       children: const [
         FeatureItem(text: 'إدارة البطاقة الخاصة بك بسهولة'),
-        FeatureItem(text: 'إضافة رصيد الليالي بسعر خاص'),
-        FeatureItem(text: 'الحجز في أكثر من دولة'),
-        FeatureItem(text: 'إهداء الليالي للعائلة والأصدقاء'),
-        FeatureItem(text: 'تثبيت الأسعار طوال فترة صلاحية البطاقة'),
-        FeatureItem(text: 'خدمة عملاء 7/24'),
       ],
     );
   }
