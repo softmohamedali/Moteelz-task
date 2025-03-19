@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/core/ui/app_font.dart';
-
+import 'package:moteelz/presentation/pages/details_payment_steps/widgets/option_selector.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../widgets/bottom_continue_btn.dart';
 import '../../widgets/exhibition_card.dart';
+import '../../widgets/feuture_item.dart';
 import '../../widgets/m_text.dart';
-import '../details_payment_steps/widgets/stepper.dart';
 
 
 class DetailsScreen extends StatelessWidget {
@@ -76,7 +74,7 @@ class DetailsScreen extends StatelessWidget {
                       color: AppColors.thr_violet_txt,
                     ),
                     SizedBox(height: 12),
-                    NightsSelector(),
+                    OptionsSelector(),
                     SizedBox(height: 24),
                     MText(
                       value:'وصف البطاقة',
@@ -85,8 +83,26 @@ class DetailsScreen extends StatelessWidget {
                       color: AppColors.thr_violet_txt,
                       textAlign: TextAlign.right,
                     ),
-                    SizedBox(height: 16),
-                    CardDescription(),
+                    SizedBox(height: 12),
+                    ReadMoreText(
+                      'منصة "مؤتمرات" العالمية هي الحل المثالي للعائلات التي تبحث عن مرونة وتوفير في السفر مع امكانية قضاء عطلات متعددة في ٣٠ دولة ضمن الدول الرئيسية التي تجعل هذه المنصة خيارة مميزة للأستخدام العائلي مرونة في تواريخ الان. تقدم العائلات عددًا معينًا من الليالي بمراعاة لنفسيه.',
+                      trimMode: TrimMode.Length,
+                      trimLines: 5,
+                      colorClickableText: Colors.pink,
+                      trimCollapsedText: 'المزيد',
+                      trimExpandedText: '',
+                      textAlign: TextAlign.right,
+                      style:  TextStyle(
+                          fontSize: AppDimens.s14,
+                          fontFamily: AppFont.fontRegular
+                      ),
+                      moreStyle: TextStyle(
+                          fontSize: AppDimens.s14,
+                        fontFamily: AppFont.fontRegular,
+                        color: AppColors.purple_txt,
+                          decoration: TextDecoration.underline
+                      ),
+                    ),
                     SizedBox(height: 24),
                     MText(
                       value:'مميزات البطاقة',
@@ -96,7 +112,15 @@ class DetailsScreen extends StatelessWidget {
                       textAlign: TextAlign.right,
                     ),
                     SizedBox(height: 16),
-                    CardFeatures(),
+                    Container(
+                      padding: EdgeInsets.all(AppDimens.p16),
+                        decoration: BoxDecoration(
+                          color: AppColors.back_ground_card_gray,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(width: 0.5,color: AppColors.gray_border)
+                        ),
+                        child: CardFeatures()
+                    ),
                     SizedBox(height: 24),
                   ],
                 ),
@@ -233,112 +257,10 @@ class PaymentCard extends StatelessWidget {
   }
 }
 
-class NightsSelector extends StatelessWidget {
-  const NightsSelector({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const PriceDisplay(price: '3,750', currency: 'ريال'),
-        const NightOption(nights: 30, isSelected: false),
-        const NightOption(nights: 15, isSelected: false),
-        const NightOption(nights: 5, isSelected: true),
-      ],
-    );
-  }
-}
 
-class NightOption extends StatelessWidget {
-  final int nights;
-  final bool isSelected;
 
-  const NightOption({
-    Key? key,
-    required this.nights,
-    required this.isSelected,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.deepPurple.withOpacity(0.1) : Colors.transparent,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isSelected ? Colors.deepPurple : Colors.grey.shade300,
-          width: 1,
-        ),
-      ),
-      child: MText(
-        value: '$nights ليلة',
-        color: isSelected ? Colors.deepPurple : AppColors.dark_gray_txt,
-        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-      ),
-    );
-  }
-}
-
-class PriceDisplay extends StatelessWidget {
-  final String price;
-  final String currency;
-
-  const PriceDisplay({
-    Key? key,
-    required this.price,
-    required this.currency,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MText(
-          value: currency,
-          color: Colors.deepPurple,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-        const SizedBox(width: 4),
-        MText(
-          value: price,
-          color: Colors.deepPurple,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ],
-    );
-  }
-}
-
-class CardDescription extends StatelessWidget {
-  const CardDescription({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        const MText(
-          value: 'منصة "مؤتمرات" العالمية هي الحل المثالي للعائلات التي تبحث عن مرونة وتوفير في السفر مع امكانية قضاء عطلات متعددة في ٣٠ دولة ضمن الدول الرئيسية التي تجعل هذه المنصة خيارة مميزة للأستخدام العائلي مرونة في تواريخ الان. تقدم العائلات عددًا معينًا من الليالي بمراعاة لنفسيه.',
-          fontSize: 14,
-          maxLines: 5,
-          textAlign: TextAlign.right,
-        ),
-        const SizedBox(height: 8),
-        TextButton(
-          onPressed: () {},
-          child: const MText(
-            value: 'المزيد',
-            color: Colors.deepPurple,
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class CardFeatures extends StatelessWidget {
   const CardFeatures({Key? key}) : super(key: key);
@@ -358,43 +280,5 @@ class CardFeatures extends StatelessWidget {
   }
 }
 
-class FeatureItem extends StatelessWidget {
-  final String text;
 
-  const FeatureItem({Key? key, required this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Row(
-        textDirection: TextDirection.rtl,
-        children: [
-          Container(
-            width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              color: Colors.deepPurple,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 16,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: MText(
-              value: text,
-              fontSize: 14,
-              textAlign: TextAlign.right,
-              maxLines: 2,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 

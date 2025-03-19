@@ -30,6 +30,8 @@ dev_dependencies:
   build_runner: ^2.0.0
   freezed: ^2.0.0
   retrofit_generator:
+  dotted_border:
+  readmore:
 
 flutter:
 
