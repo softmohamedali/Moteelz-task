@@ -46,7 +46,7 @@ class _DetailsPaymentStepsScreenState extends State<DetailsPaymentStepsScreen> {
             const SizedBox(height: 20,),
             Expanded(
                 child: Container(
-                  child: step==1?
+                  child: step==2?
                   DetailsScreen():PaymentScreen(),
                 )
             )

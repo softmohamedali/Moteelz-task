@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         primaryColor: AppColors.primary,
       ),
-      home:  WalletScreen(),
+      home:  DetailsPaymentStepsScreen(),
     );
   }
 }

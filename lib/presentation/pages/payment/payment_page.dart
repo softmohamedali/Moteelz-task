@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:moteelz/core/ui/app_dimen.dart';
+import 'package:moteelz/presentation/pages/payment/widgets/payment_card_details.dart';
 
 import '../../../core/ui/app_colors.dart';
 import '../../widgets/bottom_continue_btn.dart';
+import '../../widgets/m_text.dart';
+import '../../widgets/my_text_field.dart';
+import '../../widgets/solid_button.dart';
 
 
 class PaymentScreen extends StatelessWidget {
@@ -9,184 +14,91 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       backgroundColor: AppColors.back_ground_gray,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  PaymentCard(),
-                  SizedBox(height: 20),
-                  DiscountCodeSection(),
-                  SizedBox(height: 20),
-                  PriceDetailsSection(),
-                  SizedBox(height: 20),
-                  PaymentMethodSection(),
-                  SizedBox(height: 20),
-                  CardDetailsSection(),
-                  SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
-          ContinueButton(text:'إدفع الآن',),
-        ],
-      ),
-
-    );
-  }
-}
-
-
-class PaymentCard extends StatelessWidget {
-  const PaymentCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.grey[100],
-        ),
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          textDirection: TextDirection.rtl,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Padding(
+        padding: EdgeInsets.all(AppDimens.p30),
+        child: Column(
           children: [
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'المعارض والمؤتمرات 5 ليالي',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  textDirection: TextDirection.rtl,
-                ),
-                Text(
-                  '#الأعمال',
-                  style: TextStyle(color: Colors.grey),
-                  textDirection: TextDirection.rtl,
-                ),
-                Text(
-                  '3,750 ر.س',
-                  style: TextStyle(
-                    color: Color(0xFF8B5CF6),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: 100,
-              height: 60,
-              decoration: BoxDecoration(
-                color: const Color(0xFF006699),
-                borderRadius: BorderRadius.circular(8),
-                image: const DecorationImage(
-                  image: NetworkImage('https://via.placeholder.com/100x60'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    'PTOTEL2',
-                    style: TextStyle(color: Colors.white, fontSize: 10),
-                  ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    PaymentCard(),
+                    SizedBox(height: 20),
+                    const MText(
+                      value: 'هل لديك كوبون خصم؟',
+                      fontWeight: FontWeight.bold,
+                      textDirection: TextDirection.rtl,
+                      fontSize: AppDimens.s18,
+                      color: AppColors.thr_violet_txt,
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        Expanded(
+                          child: MyTextField(
+                              controller: TextEditingController(),
+                              hintText: 'ادخل كوبون الخصم',
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const MySolidButton(
+                          text: 'تطبيق',
+                            borderRadius:AppDimens.p12
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    PriceDetailsSection(),
+                    SizedBox(height: 20),
+                    PaymentMethodSection(),
+                    SizedBox(height: 20),
+                    CardDetailsSection(),
+                    SizedBox(height: 20),
+                  ],
                 ),
               ),
             ),
+            ContinueButton(text:'إدفع الآن',),
           ],
         ),
       ),
+
     );
   }
 }
 
-class DiscountCodeSection extends StatelessWidget {
-  const DiscountCodeSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const Text(
-            'هل لديك كوبون خصم؟',
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textDirection: TextDirection.rtl,
-          ),
-          const SizedBox(height: 8),
-          Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Expanded(
-                child: TextField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                    hintText: 'ادخل كوبون الخصم',
-                    hintStyle: TextStyle(color: Colors.grey[400]),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[100],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF8B5CF6),
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: const Text('تطبيق'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class PriceDetailsSection extends StatelessWidget {
   const PriceDetailsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const Text(
-            'تفاصيل المبلغ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            textDirection: TextDirection.rtl,
-          ),
-          const SizedBox(height: 8),
-          _buildPriceRow('5 ليالي', '3,750 ر.س'),
-          _buildPriceRow('ضريبة القيمة المضافة (15%)', '563 ر.س'),
-          const Divider(),
-          _buildPriceRow('المبلغ الإجمالي', '4,313 ر.س', isTotal: true),
-          const Divider(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+         MText(
+          value: 'تفاصيل المبلغ',
+          fontSize: AppDimens.s18,
+          fontWeight: FontWeight.bold,
+          textDirection: TextDirection.rtl,
+          color:AppColors.thr_violet_txt ,
+        ),
+        Column(
+          children: [
+            const SizedBox(height: 8),
+            _buildPriceRow('5 ليالي', '3,750 ر.س'),
+            _buildPriceRow('ضريبة القيمة المضافة (15%)', '563 ر.س'),
+            const Divider(),
+            _buildPriceRow('المبلغ الإجمالي', '4,313 ر.س', isTotal: true),
+            const Divider(),
+          ],
+        ),
+      ],
     );
   }
 
