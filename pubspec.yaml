@@ -1,0 +1,71 @@
+name: moteelz
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  flutter_hooks: ^0.20.0
+  signals: ^4.0.0
+  dio: ^5.0.0
+  retrofit: ^4.0.0
+  freezed_annotation: ^2.0.0
+  context_plus:
+  dartz:
+  flutter_native_splash:
+  flutter_svg: ^2.0.7
+  get:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.0.0
+  freezed: ^2.0.0
+  retrofit_generator:
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+
+  fonts:
+    - family: ElMessiri-Medium
+      fonts:
+        - asset: fonts/ElMessiri-Medium.ttf
+
+    - family: ElMessiri-Regular
+      fonts:
+        - asset: fonts/ElMessiri-Regular.ttf
+
+    - family: ElMessiri-Bold
+      fonts:
+        - asset: fonts/ElMessiri-Bold.ttf
+
+
+
+flutter_native_splash:
+  color: "#875FFF"
+  image: assets/images/logo4.png
+  color_dark: "#875FFF"
+  image_dark: assets/images/logo4.png
+  android_12:
+    image: assets/images/logo4.png
+    icon_background_color: "#875FFF"
+    image_dark: assets/images/logo4.png
+    icon_background_color_dark: "#875FFF"
+
+  web: false
+  ios: true
+  android: true
+
