@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/presentation/pages/payment/widgets/payment_card_details.dart';
 import 'package:moteelz/presentation/widgets/dotted_divider.dart';
@@ -18,11 +22,11 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: AppColors.back_ground_gray,
-      body: Padding(
-        padding: EdgeInsets.all(AppDimens.p30),
-        child: Column(
-          children: [
-            Expanded(
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(AppDimens.p30),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,21 +61,122 @@ class PaymentScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     PriceDetailsSection(),
                     SizedBox(height: 20),
-                    DottedDivider(
+                    const DottedDivider(
                       dashWidth: 3,
                     ),
-                    SizedBox(height: 30),
-                    PaymentMethodSection(),
-                    SizedBox(height: 20),
-                    CardDetailsSection(),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 30),
+                    MText(
+                      value: 'بيانات الدفع',
+                      fontWeight: FontWeight.bold,
+                      textDirection: TextDirection.rtl,
+                      fontSize: AppDimens.s18,
+                      color: AppColors.thr_violet_txt,
+                    ),
+                    const SizedBox(height: AppDimens.p8),
+                    MoteelzContainer(
+                      padding: AppDimens.p8,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const SizedBox(height: 16),
+                          Row(
+                            textDirection: TextDirection.rtl,
+                            children: [
+                              SvgPicture.asset("assets/icons/radio.svg"),
+                              SizedBox(width: 4,),
+                              Expanded(
+                                child: const MText(
+                                  value: 'بطاقة الإئتمان او الخصم المباشر',
+                                  fontWeight: FontWeight.bold,
+                                  textDirection: TextDirection.rtl,
+                                  fontSize: AppDimens.s14,
+                                  maxLines: 2,
+                                ),
+                              ),
+                              Image.asset(
+                                  "assets/images/payments.png",
+                                  width: Get.width*0.22,
+                                  height: 30
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          const MText(
+                            value: 'اسم البطاقة',
+                            fontWeight: FontWeight.bold,
+                            textDirection: TextDirection.rtl,
+                            fontSize: AppDimens.s16,
+                          ),
+                          const SizedBox(height: 8),
+                          MyTextField(
+                            controller: TextEditingController(),
+                            hintText: 'Nader Sayed | |',
+                          ),
+                          const SizedBox(height: 16),
+                          const MText(
+                            value: 'رقم البطاقة',
+                            fontWeight: FontWeight.bold,
+                            textDirection: TextDirection.rtl,
+                            fontSize: AppDimens.s16,
+                          ),
+                          const SizedBox(height: 8),
+                          MyTextField(
+                            controller: TextEditingController(),
+                            hintText: '1234 1234 1234 1234',
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            textDirection: TextDirection.rtl,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    MText(
+                                      value: 'انتهاء الصلاحية',
+                                      fontWeight: FontWeight.bold,
+                                      textDirection: TextDirection.rtl,
+                                      fontSize: AppDimens.s16,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    MyTextField(
+                                      controller: TextEditingController(),
+                                      hintText: '25/08',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    MText(
+                                      value: 'CVC',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimens.s16,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    MyTextField(
+                                      controller: TextEditingController(),
+                                      hintText: '***',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 40),
                   ],
                 ),
               ),
             ),
-            ContinueButton(text:'إدفع الآن',),
-          ],
-        ),
+          ),
+          ContinueButton(text:'إدفع الآن',),
+        ],
       ),
 
     );
@@ -142,147 +247,5 @@ class PriceDetailsSection extends StatelessWidget {
   }
 }
 
-class PaymentMethodSection extends StatelessWidget {
-  const PaymentMethodSection({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          MText(
-            value: 'بيانات الدفع',
-            fontWeight: FontWeight.bold,
-            textDirection: TextDirection.rtl,
-            fontSize: AppDimens.s18,
-            color: AppColors.thr_violet_txt,
-          ),
-          const SizedBox(height: 16),
-          Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Radio(
-                value: true,
-                groupValue: true,
-                onChanged: (value) {},
-                activeColor: const Color(0xFF8B5CF6),
-              ),
-              const Text(
-                'بطاقة الإئتمان او الخصم المباشر',
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textDirection: TextDirection.rtl,
-              ),
-              const Spacer(),
-              Image.asset('assets/visa.png', width: 30, height: 20),
-              const SizedBox(width: 4),
-              Image.asset('assets/mastercard.png', width: 30, height: 20),
-              const SizedBox(width: 4),
-              Image.asset('assets/mada.png', width: 30, height: 20),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CardDetailsSection extends StatelessWidget {
-  const CardDetailsSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const Text(
-            'اسم البطاقة',
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textDirection: TextDirection.rtl,
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            textAlign: TextAlign.right,
-            decoration: InputDecoration(
-              hintText: 'Nader Sayed | |',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'رقم البطاقة',
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textDirection: TextDirection.rtl,
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            textAlign: TextAlign.right,
-            decoration: InputDecoration(
-              hintText: '1234 1234 1234 1234',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'انتهاء الصلاحية',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      textAlign: TextAlign.right,
-                      decoration: InputDecoration(
-                        hintText: '25/08',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'CVC',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      textAlign: TextAlign.right,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: '***',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
 

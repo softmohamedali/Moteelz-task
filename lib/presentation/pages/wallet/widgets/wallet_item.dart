@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 
 import '../../../../core/ui/app_colors.dart';
 import '../../../widgets/exhibition_card.dart';
+import '../../../widgets/m_text.dart';
 import '../wallet_page.dart';
 import '../../../widgets/feuture_item.dart';
 
@@ -38,35 +42,34 @@ class WalletItem extends StatelessWidget {
         padding: EdgeInsets.all(AppDimens.p18),
         child: Column(
           children: [
-            ExhibitionCard(
+            Container(
+              height: Get.height * 0.25,
+              child: ExhibitionCard(),
             ),
             SizedBox(height: AppDimens.h16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.sec_pinc_txt.withAlpha(50),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(
-                    '$daysNumber ${"ليالي"}',
+                  child: MText(
+                    value: '$daysNumber ${"ليالي"}',
                     textDirection: TextDirection.rtl,
-                    style:  TextStyle(
-                      color: AppColors.sec_pinc_txt,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Text(
-                  'الأعمال#',
-                  style: TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w900,
+                    color: AppColors.sec_pinc_txt,
+                    fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
+                ),
+                MText(
+                  value: 'الأعمال#',
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16,
                 ),
               ],
             ),
@@ -74,13 +77,11 @@ class WalletItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  cardType,
-                  style:  TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.thr_violet_txt
-                  ),
+                MText(
+                  value: cardType,
+                  fontSize: AppDimens.s18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.thr_violet_txt,
                   textDirection: TextDirection.rtl,
                 ),
               ],
@@ -98,22 +99,19 @@ class WalletItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  ' ر.س $price',
-                  textDirection:TextDirection.rtl,
-                  style: TextStyle(
-                    fontSize: 22,
+                MText(
+                  value: ' ر.س $price',
+                  textDirection: TextDirection.rtl,
+                  fontSize: AppDimens.s18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primary,
-                  ),
+
                 ),
-                 Text(
-                  'السعر يبدأ من :',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primry_gray_txt,
-                    fontWeight: FontWeight.w600
-                  ),
+                MText(
+                  value: 'السعر يبدأ من :',
+                  fontSize: AppDimens.s16,
+                  color: AppColors.primry_gray_txt,
+                      fontWeight: FontWeight.w500,
                   textDirection: TextDirection.rtl,
                 ),
               ],

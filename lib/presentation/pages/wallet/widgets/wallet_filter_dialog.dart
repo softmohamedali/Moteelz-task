@@ -20,6 +20,7 @@ class _FilterDialogState extends State<FilterDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: AppColors.back_ground_card_gray,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
