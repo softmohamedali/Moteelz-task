@@ -12,7 +12,8 @@ class CustomStepper extends StatelessWidget {
     required this.steps,
     this.activeColor = const Color(0xFF8B5CF6), // Purple color
     this.inactiveColor = const Color(0xFFE5E7EB), // Light gray
-  }) : super(key: key);
+  }) : assert(steps.length == 2, 'This CustomStepper is designed for exactly 2 steps'),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,83 +22,104 @@ class CustomStepper extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
-          children: List.generate(steps.length * 2 - 1, (index) {
-            // For even indices, render step indicators
-            if (index % 2 == 0) {
-              final stepIndex = index ~/ 2;
-              final isActive = stepIndex <= currentStep;
-
-              return Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: isActive ? activeColor : inactiveColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Text(
-                          '${steps.length - stepIndex}',
-                          style: TextStyle(
-                            color: isActive ? Colors.white : const Color(0xFF6B7280),
-                            fontWeight: FontWeight.bold,
-                          ),
+          children: [
+            // Step 2
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: currentStep >= 1 ? activeColor : inactiveColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '2',
+                        style: TextStyle(
+                          color: currentStep >= 1 ? Colors.white : const Color(0xFF6B7280),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      steps[stepIndex],
-                      style: TextStyle(
-                        color: isActive ? activeColor : const Color(0xFF6B7280),
-                        fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    steps[0],
+                    style: TextStyle(
+                      color: currentStep >= 1 ? activeColor : const Color(0xFF6B7280),
+                      fontWeight: currentStep >= 1 ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Connecting line
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: 40,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    // Base line (inactive)
+                    Container(
+                      height: 4,
+                      color: inactiveColor,
+                    ),
+                    // Progress line (active)
+                    ClipPath(
+                      clipper: SteeperLineClipper(
+                        currentStep == 0 ? 0.0 :
+                        currentStep == 1 ? 0.5 : 1.0,
+                      ),
+                      child: Container(
+                        height: 4,
+                        color: activeColor,
                       ),
                     ),
                   ],
                 ),
-              );
-            }
-            // For odd indices, render connecting lines
-            else {
-              final beforeStepIndex = index ~/ 2;
-              final isActive = beforeStepIndex <= currentStep - 1;
-              // Calculate progress percentage for the current step's line
-              double progressPercentage = 0.0;
-              if (beforeStepIndex == currentStep - 1) {
-                progressPercentage = 0.5; // Half filled when at step 1
-              } else if (beforeStepIndex < currentStep - 1) {
-                progressPercentage = 1.0; // Fully filled for completed steps
-              }
+              ),
+            ),
 
-              return Expanded(
-                flex: 2,
-                child: Container(
-                  height: 40,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // Base line (inactive)
-                      Container(
-                        height: 4,
-                        color: inactiveColor,
-                      ),
-                      // Progress line (active) - With steeper slope using ClipPath
-                      ClipPath(
-                        clipper: SteeperLineClipper(progressPercentage),
-                        child: Container(
-                          height: 4,
-                          color: activeColor,
+            // Step 1
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: currentStep >= 0 ? activeColor : inactiveColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '1',
+                        style: TextStyle(
+                          color: currentStep >= 0 ? Colors.white : const Color(0xFF6B7280),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              );
-            }
-          }),
+                  const SizedBox(height: 8),
+                  Text(
+                    steps[1],
+                    style: TextStyle(
+                      color: currentStep >= 0 ? activeColor : const Color(0xFF6B7280),
+                      fontWeight: currentStep >= 0 ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -114,8 +136,7 @@ class SteeperLineClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
-    // Start at the bottom-left
-
+    path.moveTo(0, 0);
 
     // Calculate how much of the width to fill based on progress
     final fillWidth = size.width * progressPercentage;
@@ -123,6 +144,7 @@ class SteeperLineClipper extends CustomClipper<Path> {
     // Create a steeper line by adjusting the Y position
     path.lineTo(fillWidth, size.height * 0.1); // Make the line go upward for steeper effect
     path.lineTo(fillWidth, size.height);
+    path.lineTo(0, size.height);
     path.close();
 
     return path;
@@ -131,4 +153,3 @@ class SteeperLineClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
 }
-
