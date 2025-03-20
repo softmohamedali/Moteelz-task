@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:moteelz/domain/usecases/get_wallet_details.dart';
 import 'package:signals/signals.dart';
 import 'package:signals/signals_flutter.dart';
@@ -17,9 +18,17 @@ class WalletDetailsViewModel extends ChangeNotifier {
   // Dependencies
   final _getWalletDetails = sl<GetWalletDetails>();
 
+  // Signal effect disposer
+  late final Disposer _walletIdDisposer;
 
-  WalletListViewModel() {
+  WalletDetailsViewModel() {
     _init();
+    _walletIdDisposer = effect(() {
+      final id = walletId.value;
+      if (id != null) {
+        _init();
+      }
+    });
   }
 
   void _init() {
@@ -32,6 +41,7 @@ class WalletDetailsViewModel extends ChangeNotifier {
     double? maxPrice,
     int? countryId,
   }) async {
+    print("-----fetchWalletDetails------------${walletId.value}");
     isLoadingSignal.value = true;
     errorSignal.value = null;
 
@@ -49,4 +59,10 @@ class WalletDetailsViewModel extends ChangeNotifier {
     );
   }
 
+
+  @override
+  void dispose() {
+    _walletIdDisposer();
+    super.dispose();
+  }
 }
