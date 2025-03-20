@@ -15,10 +15,7 @@ final stepsViewmodelRef = Ref<DetailsPaymentStepsViewmodel>();
 class DetailsPaymentStepsScreen extends HookWidget {
   final int walletId;
 
-  const DetailsPaymentStepsScreen({
-    super.key,
-    required this.walletId
-  });
+  const DetailsPaymentStepsScreen({super.key, required this.walletId});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +25,7 @@ class DetailsPaymentStepsScreen extends HookWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
+        automaticallyImplyLeading:false,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Row(
@@ -61,8 +59,10 @@ class DetailsPaymentStepsScreen extends HookWidget {
               print("------------------watchhhh ${controller.step.value}");
               return Container(
                 child: controller.step.value == 1
-                    ? DetailsScreen()
-                    : PaymentScreen(walletId:walletId),
+                    ? DetailsScreen(
+                        walletId: walletId,
+                      )
+                    : PaymentScreen(walletId: walletId),
               );
             }))
           ],
