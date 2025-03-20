@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../../core/ui/app_colors.dart';
 import '../../../../core/ui/app_dimen.dart';
+import '../../../../core/ui/responsive.dart';
 import '../../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
 import '../../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../widgets/exhibition_card.dart';
@@ -27,8 +28,8 @@ class PaymentCard extends StatelessWidget {
         textDirection: TextDirection.rtl,
         children: [
           Container(
-              width: Get.width*0.3,
-              height: Get.height*0.08,
+              width: ResponsiveSize.cardWidth(context),
+              height: ResponsiveSize.cardHeight(context),
               child: ExhibitionCard(img: wallet.walletImage,)
           ),
           SizedBox(width: AppDimens.h8,),

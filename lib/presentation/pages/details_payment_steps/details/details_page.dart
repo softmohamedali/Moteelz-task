@@ -8,6 +8,7 @@ import 'package:moteelz/presentation/pages/details_payment_steps/widgets/option_
 import 'package:readmore/readmore.dart';
 import 'package:signals/signals_flutter.dart';
 
+import '../../../../core/ui/responsive.dart';
 import '../../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../widgets/bottom_continue_btn.dart';
 import '../../../widgets/exhibition_card.dart';
@@ -87,8 +88,8 @@ class DetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: AppDimens.p8,),
                           SizedBox(
-                            width: Get.width*0.33,
-                            height: Get.height*0.1,
+                            width: ResponsiveSize.cardWidth(context),
+                            height: ResponsiveSize.cardHeight(context),
                             child: ExhibitionCard(
                               img: viewModel.walletSignal.value?.walletImage??"",
                             ),

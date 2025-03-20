@@ -5,6 +5,7 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 
 import '../../../../core/ui/app_colors.dart';
+import '../../../../core/ui/responsive.dart';
 import '../../../widgets/exhibition_card.dart';
 import '../../../widgets/m_text.dart';
 import '../wallet_page.dart';
