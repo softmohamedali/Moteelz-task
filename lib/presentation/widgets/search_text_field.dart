@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
+import 'package:moteelz/core/ui/app_font.dart';
 
 class SearchTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -38,16 +39,16 @@ class SearchTextField extends StatelessWidget {
                 controller: controller,
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.right,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  color: AppColors.primry_gray_txt
+                style: const TextStyle(
+                  color: AppColors.primry_gray_txt,
+                  fontFamily: AppFont.fontRegular
                 ),
                 onChanged: onChanged,
                 decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                       color: AppColors.primry_gray_txt,
-                    fontWeight: FontWeight.bold,
+                      fontFamily: AppFont.fontRegular
                   ),
                   hintTextDirection: TextDirection.rtl,
                   border: InputBorder.none,

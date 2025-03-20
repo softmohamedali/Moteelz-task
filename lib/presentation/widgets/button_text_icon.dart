@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 
+import 'm_text.dart';
+
 class FilterButton extends StatelessWidget {
   final String svgString;
   final String text;
@@ -32,13 +34,12 @@ class FilterButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              text,
-              style: TextStyle(
+            MText(
+              value: text,
                 color: textColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-              ),
+
             ),
             const SizedBox(width: 8),
             SvgPicture.asset(

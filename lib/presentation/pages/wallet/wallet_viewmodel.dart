@@ -10,6 +10,10 @@ import '../../../domain/usecases/get_wallets.dart';
 class WalletListViewModel extends ChangeNotifier {
   final  minPriceController = signal<double>(0);
   final  maxPriceController = signal<double>(10000);
+
+
+  final searchQueryController=TextEditingController();
+  final searchQuery=signal<String>("");
   // State variables
   final walletsSignal = signal<List<WalletModel>>([]);
   final countriesSignal = signal<List<CountryModel>>([]);
@@ -29,6 +33,13 @@ class WalletListViewModel extends ChangeNotifier {
   void _init() {
     fetchWallets();
     fetchCountries();
+    searchQueryController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    print("change");
+    searchQuery.value=searchQueryController.text;
+    print("Text changed: ");
   }
 
 

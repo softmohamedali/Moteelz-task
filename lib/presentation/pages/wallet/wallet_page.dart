@@ -33,7 +33,7 @@ class WalletScreen extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
         title: SearchTextField(
-          controller: TextEditingController(),
+          controller: viewModel.searchQueryController,
         ),
       ),
       floatingActionButtonLocation:FloatingActionButtonLocation.startFloat,
@@ -61,6 +61,9 @@ class WalletScreen extends StatelessWidget {
         final isLoading = viewModel.isLoadingSignal.value;
         final error = viewModel.errorSignal.value;
         final isFilterApplied = viewModel.isFilterAppliedSignal.value;
+        var searchResult=viewModel.walletsSignal.value
+            .where((item) => item.name.toLowerCase().contains(viewModel.searchQuery.value))
+            .toList();
 
         if (isLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -87,7 +90,10 @@ class WalletScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const MText(value: 'لا توجد محافظ متاحة'),
+                const MText(
+                    value: 'لا توجد محافظ متاحة',
+                  color: AppColors.sec_pinc_txt,
+                ),
                 if (isFilterApplied)
                   ElevatedButton(
                     onPressed: viewModel.resetFilters,
@@ -98,30 +104,80 @@ class WalletScreen extends StatelessWidget {
           );
         }
 
-        return Padding(
-          padding:  const EdgeInsets.all(16.0),
-          child: ListView.separated(
-            physics: const ClampingScrollPhysics(),
-            itemCount: viewModel.walletsSignal.value.length,
-            separatorBuilder: (context, index) =>  Container(
-              height:AppDimens.h16,
+        if(viewModel.searchQuery.value.trim().isNotEmpty){
+          //easy and tricky way to search
+          if (searchResult.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const MText(
+                    value: 'لا توجد محافظ متاحة',
+                    color: AppColors.sec_pinc_txt,
+                  ),
+                  if (isFilterApplied)
+                    ElevatedButton(
+                      onPressed: viewModel.resetFilters,
+                      child: const Text('إعادة تعيين التصفية'),
+                    ),
+                ],
+              ),
+            );
+          }
+
+          return Padding(
+            padding:  const EdgeInsets.all(16.0),
+            child: ListView.separated(
+              physics: const ClampingScrollPhysics(),
+              itemCount: searchResult.length,
+              separatorBuilder: (context, index) =>  Container(
+                height:AppDimens.h16,
+              ),
+              itemBuilder: (context, index) {
+                final item = searchResult[index];
+                return WalletItem(
+                  cardImgUrl: item.walletImage,
+                  validThru: item.expiryDate.toString(),
+                  daysNumber: item.availableDays.toString(),
+                  cardType: item.walletCategory.name,
+                  price: item.price,
+                  features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
+                  onTap: (){
+                    Get.to(()=> DetailsPaymentStepsScreen(walletId: item.id,));
+                  },
+                );
+              },
             ),
-            itemBuilder: (context, index) {
-              final item = wallets[index];
-              return WalletItem(
-                cardImgUrl: item.walletImage,
-                validThru: item.expiryDate.toString(),
-                daysNumber: item.availableDays.toString(),
-                cardType: item.walletCategory.name,
-                price: item.price,
-                features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
-                onTap: (){
-                  Get.to(()=> DetailsPaymentStepsScreen(walletId: item.id,));
-                },
-              );
-            },
-          ),
-        );
+          );
+        }else{
+          return Padding(
+            padding:  const EdgeInsets.all(16.0),
+            child: ListView.separated(
+              physics: const ClampingScrollPhysics(),
+              itemCount: viewModel.walletsSignal.value.length,
+              separatorBuilder: (context, index) =>  Container(
+                height:AppDimens.h16,
+              ),
+              itemBuilder: (context, index) {
+                final item = wallets[index];
+                return WalletItem(
+                  cardImgUrl: item.walletImage,
+                  validThru: item.expiryDate.toString(),
+                  daysNumber: item.availableDays.toString(),
+                  cardType: item.walletCategory.name,
+                  price: item.price,
+                  features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
+                  onTap: (){
+                    Get.to(()=> DetailsPaymentStepsScreen(walletId: item.id,));
+                  },
+                );
+              },
+            ),
+          );
+        }
+
+
+        
       }),
     );
   }
