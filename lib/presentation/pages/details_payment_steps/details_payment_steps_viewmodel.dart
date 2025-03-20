@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -6,12 +5,9 @@ import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../../core/di/injection.dart';
-import '../../../core/ui/app_colors.dart';
 import '../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
 import '../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../domain/usecases/get_wallet_details.dart';
-import '../../../presentation/widgets/m_text.dart';
-import '../../widgets/success_payment_dialog.dart';
 
 class DetailsPaymentStepsViewmodel extends ChangeNotifier {
   // State variables
