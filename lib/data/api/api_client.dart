@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import '../dto/wallet_model.dart';
+import '../dto/country_reponse/country_response.dart';
+import '../dto/wallet_details_response/wallet_details_response.dart';
+import '../dto/wallets_response/wallets_response.dart';
 
 part 'api_client.g.dart';
 

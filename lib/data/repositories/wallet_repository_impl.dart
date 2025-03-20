@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import '../../core/error/failure.dart';
 import '../../domain/repositories/wallet_repository.dart';
 import '../api/api_client.dart';
-import '../dto/wallet_model.dart';
+import '../dto/country_reponse/country_model/country_model.dart';
+import '../dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
+import '../dto/wallets_response/wallet_model/wallet_model.dart';
 
 class WalletRepositoryImpl implements WalletRepository {
   final ApiClient _apiClient;

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../core/error/failure.dart';
-import '../../data/dto/wallet_model.dart';
+import '../../data/dto/country_reponse/country_model/country_model.dart';
 import '../repositories/wallet_repository.dart';
 
 class GetCountries {

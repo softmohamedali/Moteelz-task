@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 import 'package:moteelz/core/ui/app_font.dart';
-import 'package:moteelz/data/dto/wallet_model.dart';
 import 'package:moteelz/presentation/pages/wallet/widgets/text_border.dart';
 import 'package:moteelz/presentation/widgets/m_text.dart';
 import 'package:signals/signals_flutter.dart';
 
+import '../../../../data/dto/country_reponse/country_model/country_model.dart';
 import '../wallet_page.dart';
 
 class FilterDialog extends StatefulWidget {

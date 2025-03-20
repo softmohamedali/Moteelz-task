@@ -4,9 +4,7 @@ import 'package:signals/signals.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../../core/di/injection.dart';
-import '../../../data/dto/wallet_model.dart';
-import '../../../domain/usecases/get_countries.dart';
-import '../../../domain/usecases/get_wallets.dart';
+import '../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
 
 class WalletDetailsViewModel extends ChangeNotifier {
 

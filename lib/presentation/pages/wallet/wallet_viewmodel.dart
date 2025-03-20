@@ -3,7 +3,8 @@ import 'package:signals/signals.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../../core/di/injection.dart';
-import '../../../data/dto/wallet_model.dart';
+import '../../../data/dto/country_reponse/country_model/country_model.dart';
+import '../../../data/dto/wallets_response/wallet_model/wallet_model.dart';
 import '../../../domain/usecases/get_countries.dart';
 import '../../../domain/usecases/get_wallets.dart';
 
