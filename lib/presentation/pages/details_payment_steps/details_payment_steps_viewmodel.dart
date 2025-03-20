@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -5,9 +6,12 @@ import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../../core/di/injection.dart';
+import '../../../core/ui/app_colors.dart';
 import '../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
 import '../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../domain/usecases/get_wallet_details.dart';
+import '../../../presentation/widgets/m_text.dart';
+import '../../widgets/success_payment_dialog.dart';
 
 class DetailsPaymentStepsViewmodel extends ChangeNotifier {
   // State variables
@@ -138,45 +142,29 @@ class DetailsPaymentStepsViewmodel extends ChangeNotifier {
     );
   }
 
-  bool validatePaymentForm() {
-    if (formKey.currentState?.validate() ?? false) {
+
+  bool validateCard() {
+    if(
+    cardNumber.text.isEmpty||
+    cardCvc.text.isEmpty||
+    cardExpire.text.isEmpty||
+    cardHolderName.text.isEmpty
+    ){
       return true;
     }
     return false;
   }
 
-  String? validateCardNumber(String? value) {
-    if (value == null || value.isEmpty) {
-      return "الرجاء إدخال رقم البطاقة";
-    }
-    return null;
-  }
-
-  String? validateCardExpiry(String? value) {
-    if (value == null || value.isEmpty) {
-      return "الرجاء إدخال تاريخ انتهاء الصلاحية";
-    }
-
-    return null;
-  }
-
-  String? validateCVC(String? value) {
-    if (value == null || value.isEmpty) {
-      return "الرجاء إدخال رمز الأمان";
-    }
-    return null;
-  }
-
-  String? validateCardHolderName(String? value) {
-    if (value == null || value.isEmpty) {
-      return "الرجاء إدخال اسم حامل البطاقة";
-    }
-
-    return null;
-  }
-
   Future<void> processPayment() async {
-    if (!validatePaymentForm()) {
+    if (validateCard()) {
+      Get.snackbar(
+        "تنبيه",
+        "جميع حقول الفيزا مطلوبه",
+        backgroundColor:Colors.orange[500],
+        colorText:Colors.white,
+        snackPosition: SnackPosition.TOP,
+        duration: const Duration(seconds: 3),
+      );
       return;
     }
     isSubmitting.value = true;

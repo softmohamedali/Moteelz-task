@@ -161,7 +161,6 @@ class PaymentScreen extends StatelessWidget {
                               MyTextField(
                                 controller: viewModel.cardHolderName,
                                 hintText: 'Nader Sayed | |',
-                                validator: viewModel.validateCardHolderName,
                               ),
                               const SizedBox(height: 16),
                               const MText(
@@ -175,7 +174,6 @@ class PaymentScreen extends StatelessWidget {
                                 controller: viewModel.cardNumber,
                                 hintText: '1234 1234 1234 1234',
                                 keyboardType: TextInputType.number,
-                                validator: viewModel.validateCardNumber,
                               ),
                               const SizedBox(height: 16),
                               Row(
@@ -196,7 +194,6 @@ class PaymentScreen extends StatelessWidget {
                                           controller: viewModel.cardExpire,
                                           hintText: '25/08',
                                           keyboardType: TextInputType.datetime,
-                                          validator: viewModel.validateCardExpiry,
                                         ),
                                       ],
                                     ),
@@ -217,7 +214,6 @@ class PaymentScreen extends StatelessWidget {
                                           hintText: '***',
                                           keyboardType: TextInputType.number,
                                           obscureText: true,
-                                          validator: viewModel.validateCVC,
                                         ),
                                       ],
                                     ),
