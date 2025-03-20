@@ -19,7 +19,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = stepsViewmodel.bind(context, () => detailsPaymentStepsViewModel);
+    final controller = stepsViewmodelRef.bind(context, () => detailsPaymentStepsViewModel);
     return Scaffold(
       backgroundColor: AppColors.back_ground_gray,
       body:  Column(
@@ -37,7 +37,7 @@ class DetailsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             MText(
@@ -55,17 +55,17 @@ class DetailsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(width: AppDimens.p8,),
-                        Container(
+                        const SizedBox(width: AppDimens.p8,),
+                        SizedBox(
                           width: Get.width*0.33,
                           height: Get.height*0.1,
-                          child: ExhibitionCard(
+                          child: ExhibitionCard(img: '',
                           ),
                         ),
                       ],
                     ),
                     SizedBox(height: 24),
-                    MText(
+                    const MText(
                       value: ': اختر عدد الليالي',
                       fontSize: AppDimens.s14,
                       fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class DetailsScreen extends StatelessWidget {
                       textAlign: TextAlign.right,
                     ),
                     SizedBox(height: 12),
-                    ReadMoreText(
+                    const ReadMoreText(
                       'منصة ',
                       trimMode: TrimMode.Length,
                       trimLines: 5,
@@ -103,7 +103,7 @@ class DetailsScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 24),
-                    MText(
+                    const MText(
                       value:'مميزات البطاقة',
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

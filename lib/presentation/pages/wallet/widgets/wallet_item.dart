@@ -11,10 +11,9 @@ import '../wallet_page.dart';
 import '../../../widgets/feuture_item.dart';
 
 class WalletItem extends StatelessWidget {
-  final String cardNumber;
+  final String cardImgUrl;
   final String validThru;
   final String daysNumber;
-  final String holderName;
   final String cardType;
   final double price;
   final List<String> features;
@@ -22,10 +21,9 @@ class WalletItem extends StatelessWidget {
 
   const WalletItem({
     Key? key,
-    required this.cardNumber,
+    required this.cardImgUrl,
     required this.validThru,
     required this.daysNumber,
-    required this.holderName,
     required this.cardType,
     required this.price,
     required this.features,
@@ -48,7 +46,9 @@ class WalletItem extends StatelessWidget {
             children: [
               Container(
                 height: Get.height * 0.25,
-                child: ExhibitionCard(),
+                child: ExhibitionCard(
+                  img:cardImgUrl
+                ),
               ),
               SizedBox(height: AppDimens.h16),
               Row(

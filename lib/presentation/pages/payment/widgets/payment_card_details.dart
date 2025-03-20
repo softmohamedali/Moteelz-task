@@ -22,7 +22,7 @@ class PaymentCard extends StatelessWidget {
           Container(
               width: Get.width*0.3,
               height: Get.height*0.08,
-              child: ExhibitionCard()
+              child: ExhibitionCard(img: '',)
           ),
           SizedBox(width: AppDimens.h8,),
           Expanded(

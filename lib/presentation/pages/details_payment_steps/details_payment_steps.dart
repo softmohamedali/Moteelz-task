@@ -10,13 +10,13 @@ import '../details/details_page.dart';
 import 'details_payment_steps_viewmodel.dart';
 
 final detailsPaymentStepsViewModel = DetailsPaymentStepsViewmodel();
-final stepsViewmodel = Ref<DetailsPaymentStepsViewmodel>();
+final stepsViewmodelRef = Ref<DetailsPaymentStepsViewmodel>();
 
 class DetailsPaymentStepsScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller =
-        stepsViewmodel.bind(context, () => detailsPaymentStepsViewModel);
+        stepsViewmodelRef.bind(context, () => detailsPaymentStepsViewModel);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:moteelz/core/ui/app_assets.dart';
 
 class ExhibitionCard extends StatelessWidget {
-
+  final String img;
   const ExhibitionCard({
-    Key? key,
+    Key? key, required this.img,
   }) : super(key: key);
 
   @override
@@ -19,12 +19,21 @@ class ExhibitionCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16 * scale),
             color: Colors.blue[700],
-            image: const DecorationImage(
-              image: AssetImage(AppAssets.cardBack),
-              fit: BoxFit.cover,
-            ),
           ),
-          child: SizedBox(),
+          child: Image.network(
+            img,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.error);
+            },
+          )
         );
       },
     );

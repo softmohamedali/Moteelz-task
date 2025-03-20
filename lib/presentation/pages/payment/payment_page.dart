@@ -21,7 +21,7 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = stepsViewmodel.bind(context, () => detailsPaymentStepsViewModel);
+    final controller = stepsViewmodelRef.bind(context, () => detailsPaymentStepsViewModel);
     return  Scaffold(
       backgroundColor: AppColors.back_ground_gray,
       body: Column(
