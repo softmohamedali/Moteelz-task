@@ -8,28 +8,21 @@ import 'package:moteelz/presentation/pages/details_payment_steps/widgets/option_
 import 'package:readmore/readmore.dart';
 import 'package:signals/signals_flutter.dart';
 
-import '../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
-import '../../widgets/bottom_continue_btn.dart';
-import '../../widgets/exhibition_card.dart';
-import '../../widgets/feuture_item.dart';
-import '../../widgets/m_text.dart';
-import '../details_payment_steps/details_payment_steps.dart';
-import 'details_viewmodel.dart';
-
-final _walletDetailsViewModel = WalletDetailsViewModel();
-final _walletDetailsViewModelRef = Ref<WalletDetailsViewModel>();
+import '../../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
+import '../../../widgets/bottom_continue_btn.dart';
+import '../../../widgets/exhibition_card.dart';
+import '../../../widgets/feuture_item.dart';
+import '../../../widgets/m_text.dart';
+import '../details_payment_steps.dart';
 class DetailsScreen extends StatelessWidget {
-  final int walletId;
+
   const DetailsScreen({
     Key? key,
-    required this.walletId
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = stepsViewmodelRef.bind(context, () => detailsPaymentStepsViewModel);
-    final viewModel = _walletDetailsViewModelRef.bind(context, () => _walletDetailsViewModel);
-    viewModel.walletId.value=walletId;
+    final viewModel = detailsPaymentViewmodelRef.bindValue(context,detailsPaymentStepsViewModel);
     return Scaffold(
 
       backgroundColor: AppColors.back_ground_gray,
@@ -74,7 +67,7 @@ class DetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               MText(
@@ -137,7 +130,7 @@ class DetailsScreen extends StatelessWidget {
                         textAlign: TextAlign.right,
                       ),
                       SizedBox(height: 12),
-                       ReadMoreText(
+                      ReadMoreText(
                         wallet.description,
                         trimMode: TrimMode.Length,
                         trimLines: 5,
@@ -148,7 +141,7 @@ class DetailsScreen extends StatelessWidget {
                         style:  const TextStyle(
                             fontSize: AppDimens.s14,
                             fontFamily: AppFont.fontMedium,
-                          color: AppColors.primry_gray_txt
+                            color: AppColors.primry_gray_txt
                         ),
                         moreStyle: TextStyle(
                             fontSize: AppDimens.s14,
@@ -196,8 +189,7 @@ class DetailsScreen extends StatelessWidget {
             ),
             ContinueButton(
                 onTap: (){
-                  controller.goNext();
-
+                  viewModel.goNext();
                 },
                 text: 'المتابعة للدفع'
             ),

@@ -6,7 +6,7 @@ class AppAssets{
   static const String logo = "assets/icons/logo.svg";
   static const String radio = "assets/icons/radio.svg";
   static const String search = "assets/icons/search.svg";
-  static const String successDone = "assets/icons/successDone.svg";
+  static const String successDone = "assets/icons/success_done.svg";
 
 
   //images

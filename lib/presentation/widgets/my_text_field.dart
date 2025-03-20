@@ -10,12 +10,18 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final Function(String)? onChanged;
+  final TextInputType keyboardType;
+  final bool obscureText;
+  final Function(String? value)? validator;
 
   const MyTextField({
     super.key,
     required this.controller,
     this.hintText = 'ابحث عن بطاقة',
     this.onChanged,
+    this.keyboardType=TextInputType.none,
+    this.obscureText=false,
+    this.validator,
   });
 
   @override
@@ -25,6 +31,7 @@ class MyTextField extends StatelessWidget {
       child: MoteelzContainer(
         child: TextField(
           controller: controller,
+          keyboardType: keyboardType,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.right,
           style: const TextStyle(
@@ -32,6 +39,7 @@ class MyTextField extends StatelessWidget {
             fontFamily: AppFont.fontRegular
           ),
           onChanged: onChanged,
+          obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(

@@ -5,7 +5,6 @@ import 'package:moteelz/core/ui/app_dimen.dart';
 import '../../../../core/ui/app_colors.dart';
 import '../../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../widgets/m_text.dart';
-import '../../details/details_page.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class OptionsSelector extends StatelessWidget {

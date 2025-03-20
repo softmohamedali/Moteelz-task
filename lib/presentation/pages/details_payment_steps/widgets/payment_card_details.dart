@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../../../core/ui/app_colors.dart';
 import '../../../../core/ui/app_dimen.dart';
 import '../../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
@@ -45,10 +44,10 @@ class PaymentCard extends StatelessWidget {
                         color: AppColors.sec_pinc_txt.withAlpha(50),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Text(
-                        '${"5"} ${"ليالي"}',
+                      child:  Text(
+                        '${dayOption.days} ${"ليالي"}',
                         textDirection: TextDirection.rtl,
-                        style:  TextStyle(
+                        style:  const TextStyle(
                           color: AppColors.sec_pinc_txt,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
