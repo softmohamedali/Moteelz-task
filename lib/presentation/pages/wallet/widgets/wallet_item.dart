@@ -13,8 +13,9 @@ import '../../../widgets/feuture_item.dart';
 class WalletItem extends StatelessWidget {
   final String cardImgUrl;
   final String validThru;
+  final String catigory;
   final String daysNumber;
-  final String cardType;
+  final String name;
   final double price;
   final List<String> features;
   final GestureTapCallback? onTap;
@@ -24,10 +25,10 @@ class WalletItem extends StatelessWidget {
     required this.cardImgUrl,
     required this.validThru,
     required this.daysNumber,
-    required this.cardType,
+    required this.name,
     required this.price,
     required this.features,
-    this.onTap,
+    this.onTap, required this.catigory,
   }) : super(key: key);
 
   @override
@@ -70,7 +71,7 @@ class WalletItem extends StatelessWidget {
                     ),
                   ),
                   MText(
-                    value: 'الأعمال#',
+                    value: '${catigory}#',
                     color: AppColors.primary,
                     fontWeight: FontWeight.w900,
                     fontSize: 16,
@@ -82,7 +83,7 @@ class WalletItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   MText(
-                    value: cardType,
+                    value: name,
                     fontSize: AppDimens.s18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.thr_violet_txt,

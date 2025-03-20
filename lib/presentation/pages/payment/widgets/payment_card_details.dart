@@ -5,12 +5,20 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../core/ui/app_colors.dart';
 import '../../../../core/ui/app_dimen.dart';
+import '../../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
+import '../../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../widgets/exhibition_card.dart';
 import '../../../widgets/m_text.dart';
 import '../../../widgets/moteelz_container_details.dart';
 
 class PaymentCard extends StatelessWidget {
-  const PaymentCard({super.key});
+  final WalletDetailModel wallet;
+  final DayOption dayOption;
+  const PaymentCard({
+    super.key,
+    required this.wallet,
+    required this.dayOption
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +30,7 @@ class PaymentCard extends StatelessWidget {
           Container(
               width: Get.width*0.3,
               height: Get.height*0.08,
-              child: ExhibitionCard(img: '',)
+              child: ExhibitionCard(img: wallet.walletImage,)
           ),
           SizedBox(width: AppDimens.h8,),
           Expanded(
@@ -49,7 +57,7 @@ class PaymentCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: MText(
-                        value:'المعارض والمؤتمرات',
+                        value:wallet.name,
                         fontWeight: FontWeight.bold,
                         textDirection: TextDirection.rtl,
                         fontSize: AppDimens.s18,
@@ -59,13 +67,13 @@ class PaymentCard extends StatelessWidget {
                   ],
                 ),
                 MText(
-                  value:'#الأعمال',
+                  value:"# ${wallet.walletCategory.name}",
                   color: AppColors.primry_gray_txt,
                   textDirection: TextDirection.rtl,
                   fontWeight: FontWeight.bold,
                 ),
                 MText(
-                  value: '3,750 ر.س',
+                  value: '${"${(double.parse(dayOption.days))*(wallet.price)}"} ر.س',
                   color: Color(0xFF8B5CF6),
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

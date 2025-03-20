@@ -46,7 +46,6 @@ class DetailsPaymentStepsScreen extends HookWidget {
             Padding(
                 padding: EdgeInsets.only(top: AppDimens.p18),
                 child: Watch((context) {
-                  print("------------------watchhhh ${controller.step.value}");
                   return CustomStepper(
                     currentStep: controller.step.value,
                     steps: ['البطاقة', 'ادفع الآن'],
@@ -56,13 +55,12 @@ class DetailsPaymentStepsScreen extends HookWidget {
               height: 20,
             ),
             Expanded(child: Watch((context) {
-              print("------------------watchhhh ${controller.step.value}");
               return Container(
                 child: controller.step.value == 1
                     ? DetailsScreen(
                         walletId: walletId,
                       )
-                    : PaymentScreen(walletId: walletId),
+                    : PaymentScreen(),
               );
             }))
           ],

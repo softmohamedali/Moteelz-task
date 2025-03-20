@@ -137,9 +137,10 @@ class WalletScreen extends StatelessWidget {
                 final item = searchResult[index];
                 return WalletItem(
                   cardImgUrl: item.walletImage,
+                  catigory: item.walletCategory.name,
                   validThru: item.expiryDate.toString(),
                   daysNumber: item.availableDays.toString(),
-                  cardType: item.walletCategory.name,
+                  name: item.name,
                   price: item.price,
                   features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
                   onTap: (){
@@ -162,9 +163,10 @@ class WalletScreen extends StatelessWidget {
                 final item = wallets[index];
                 return WalletItem(
                   cardImgUrl: item.walletImage,
+                  catigory:item.walletCategory.name ,
                   validThru: item.expiryDate.toString(),
                   daysNumber: item.availableDays.toString(),
-                  cardType: item.walletCategory.name,
+                  name: item.name,
                   price: item.price,
                   features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
                   onTap: (){

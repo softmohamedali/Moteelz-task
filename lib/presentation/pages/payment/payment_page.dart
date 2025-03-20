@@ -4,28 +4,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:moteelz/core/ui/app_assets.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
+import 'package:moteelz/presentation/pages/payment/payment_viewmodel.dart';
 import 'package:moteelz/presentation/pages/payment/widgets/payment_card_details.dart';
 import 'package:moteelz/presentation/widgets/dotted_divider.dart';
 import 'package:moteelz/presentation/widgets/moteelz_container_details.dart';
 
 import '../../../core/ui/app_colors.dart';
+import '../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
+import '../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../widgets/bottom_continue_btn.dart';
 import '../../widgets/m_text.dart';
 import '../../widgets/my_text_field.dart';
 import '../../widgets/solid_button.dart';
 import '../details_payment_steps/details_payment_steps.dart';
 
+final _walletDetailsViewModel = PaymentViewModel();
+final _walletDetailsViewModelRef = Ref<PaymentViewModel>();
 
 class PaymentScreen extends StatelessWidget {
-  final int walletId;
   const PaymentScreen({
     super.key,
-    required this.walletId
   });
 
   @override
   Widget build(BuildContext context) {
     final controller = stepsViewmodelRef.bind(context, () => detailsPaymentStepsViewModel);
+    final viewModel = _walletDetailsViewModelRef.bind(context, () => _walletDetailsViewModel);
     return  Scaffold(
       backgroundColor: AppColors.back_ground_gray,
       body: Column(
@@ -38,9 +42,12 @@ class PaymentScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    SizedBox(height: 20),
-                    PaymentCard(),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    PaymentCard(
+                      wallet: wallet,
+                      dayOption: dayOption,
+                    ),
+                    const SizedBox(height: 20),
                     const MText(
                       value: 'هل لديك كوبون خصم؟',
                       fontWeight: FontWeight.bold,

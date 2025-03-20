@@ -3,34 +3,52 @@ import 'package:flutter/material.dart';
 import 'package:moteelz/core/ui/app_dimen.dart';
 
 import '../../../../core/ui/app_colors.dart';
+import '../../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../../widgets/m_text.dart';
 import '../../details/details_page.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class OptionsSelector extends StatelessWidget {
-  const OptionsSelector({Key? key}) : super(key: key);
+  final List<DayOption> options;
+  final Function(DayOption) onSelect;
+  final dynamic selected;
+  const OptionsSelector({
+    Key? key,
+    required this.options,
+    required this.onSelect,
+    this.selected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const PriceDisplay(price: '3,750', currency: 'ريال'),
-        Row(
-          children: [
-            const NightOption(nights: 30, isSelected: false),
-            const NightOption(nights: 15, isSelected: false),
-            const NightOption(nights: 5, isSelected: true),
-          ],
-        ),
-      ],
+    return SizedBox(
+      height: 40,
+      child: ListView.builder(
+        reverse:true,
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: options.length,
+        itemBuilder: (context, index) {
+          final option = options[index];
+          final isSelected = selected == option;
+          return InkWell(
+            onTap: (){
+              onSelect(option);
+            },
+            child: NightOption(
+              nights: option.days,
+              isSelected: isSelected,
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
 
 class NightOption extends StatelessWidget {
-  final int nights;
+  final String nights;
   final bool isSelected;
 
   const NightOption({

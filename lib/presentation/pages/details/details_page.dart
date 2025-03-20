@@ -8,6 +8,7 @@ import 'package:moteelz/presentation/pages/details_payment_steps/widgets/option_
 import 'package:readmore/readmore.dart';
 import 'package:signals/signals_flutter.dart';
 
+import '../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 import '../../widgets/bottom_continue_btn.dart';
 import '../../widgets/exhibition_card.dart';
 import '../../widgets/feuture_item.dart';
@@ -35,6 +36,7 @@ class DetailsScreen extends StatelessWidget {
       body:  Watch((context){
         final isLoading = viewModel.isLoadingSignal.value;
         final error = viewModel.errorSignal.value;
+        final wallet = viewModel.walletSignal.value;
 
         if (isLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -72,11 +74,11 @@ class DetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Column(
+                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               MText(
-                                value: 'المعارض والمؤتمرات',
+                                value: wallet!.name,
                                 fontSize: AppDimens.s16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.thr_violet_txt,
@@ -84,7 +86,7 @@ class DetailsScreen extends StatelessWidget {
                               ),
                               SizedBox(height: AppDimens.h12),
                               MText(
-                                value: '#الأعمال',
+                                value: "# ${wallet.walletCategory.name}",
                                 color: AppColors.purple_txt,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -109,9 +111,25 @@ class DetailsScreen extends StatelessWidget {
                         color: AppColors.thr_violet_txt,
                       ),
                       SizedBox(height: 12),
-                      OptionsSelector(),
-                      SizedBox(height: 24),
-                      MText(
+                      Row(
+                        children: [
+                          PriceDisplay(
+                              price: "${(double.parse(viewModel.selectedNightSignal.value!.days))*(viewModel.walletSignal.value!.price)}",
+                              currency: 'ريال'
+                          ),
+                          Expanded(
+                            child: OptionsSelector(
+                              selected: viewModel.selectedNightSignal.value,
+                              options: viewModel.walletSignal.value!.numbersOfDays,
+                              onSelect: (DayOption value){
+                                viewModel.selectedNightSignal.value=value;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      const MText(
                         value:'وصف البطاقة',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -119,21 +137,22 @@ class DetailsScreen extends StatelessWidget {
                         textAlign: TextAlign.right,
                       ),
                       SizedBox(height: 12),
-                      const ReadMoreText(
-                        'منصة ',
+                       ReadMoreText(
+                        wallet.description,
                         trimMode: TrimMode.Length,
                         trimLines: 5,
                         colorClickableText: Colors.pink,
                         trimCollapsedText: 'المزيد',
                         trimExpandedText: '',
                         textAlign: TextAlign.right,
-                        style:  TextStyle(
+                        style:  const TextStyle(
                             fontSize: AppDimens.s14,
-                            fontFamily: AppFont.fontRegular
+                            fontFamily: AppFont.fontMedium,
+                          color: AppColors.primry_gray_txt
                         ),
                         moreStyle: TextStyle(
                             fontSize: AppDimens.s14,
-                            fontFamily: AppFont.fontRegular,
+                            fontFamily: AppFont.fontMedium,
                             color: AppColors.purple_txt,
                             decoration: TextDecoration.underline
                         ),
@@ -177,8 +196,8 @@ class DetailsScreen extends StatelessWidget {
             ),
             ContinueButton(
                 onTap: (){
-                  print("------------------clciked");
                   controller.goNext();
+
                 },
                 text: 'المتابعة للدفع'
             ),

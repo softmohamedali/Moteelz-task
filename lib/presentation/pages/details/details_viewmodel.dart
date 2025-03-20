@@ -6,12 +6,14 @@ import 'package:signals/signals_flutter.dart';
 
 import '../../../core/di/injection.dart';
 import '../../../data/dto/wallet_details_response/wallet_details_model/wallet_details_model.dart';
+import '../../../data/dto/wallets_response/wallet_model/day_option/dey_option.dart';
 
 class WalletDetailsViewModel extends ChangeNotifier {
 
   // State variables
   final walletId=signal<int?>(null);
   final walletSignal = signal<WalletDetailModel?>(null);
+  final selectedNightSignal = signal<DayOption?>(null);
   final isLoadingSignal = signal<bool>(true);
   final errorSignal = signal<String?>(null);
 
@@ -54,6 +56,7 @@ class WalletDetailsViewModel extends ChangeNotifier {
       },
           (data) {
         walletSignal.value = data;
+        selectedNightSignal.value=walletSignal.value!.numbersOfDays[0];
         isLoadingSignal.value = false;
       },
     );
