@@ -22,6 +22,7 @@ class ExhibitionCard extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Image.network(
             img,
+            fit: BoxFit.fill,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;
