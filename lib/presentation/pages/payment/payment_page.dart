@@ -17,7 +17,11 @@ import '../details_payment_steps/details_payment_steps.dart';
 
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key});
+  final int walletId;
+  const PaymentScreen({
+    super.key,
+    required this.walletId
+  });
 
   @override
   Widget build(BuildContext context) {

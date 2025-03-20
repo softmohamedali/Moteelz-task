@@ -19,7 +19,6 @@ class FilterDialog extends StatefulWidget {
 }
 
 class _FilterDialogState extends State<FilterDialog> {
-  RangeValues _currentRangeValues = const RangeValues(250, 7500);
   String? selectedCountry;
 
   @override
@@ -88,13 +87,13 @@ class _FilterDialogState extends State<FilterDialog> {
                           SizedBox(
                             width: Get.width*0.3,
                             child: TextBorder(
-                              value: 'رس ${_currentRangeValues.end.toInt()}',
+                              value: 'رس ${viewModel.minPriceController}',
                             ),
                           ),
                           SizedBox(
                             width: Get.width*0.3,
                             child: TextBorder(
-                              value: 'رس ${_currentRangeValues.start.toInt()}',
+                              value: 'رس ${viewModel.maxPriceController}',
                             ),
                           ),
                         ],
@@ -112,15 +111,15 @@ class _FilterDialogState extends State<FilterDialog> {
                         ),
                         child: RangeSlider(
                           values: RangeValues(
-                          double.parse(viewModel.minPriceController.text),
-                            double.parse(viewModel.maxPriceController.text)
+                          viewModel.minPriceController.value,
+                            viewModel.maxPriceController.value
                           ),
                           min: 0,
                           max: 10000,
                           divisions: 100,
                           onChanged: (RangeValues values) {
-                            viewModel.minPriceController.text=values.start.toString();
-                            viewModel.maxPriceController.text=values.end.toString();
+                            viewModel.minPriceController.value=values.start;
+                            viewModel.maxPriceController.value=values.end;
                           },
                         ),
                       ),
@@ -137,7 +136,7 @@ class _FilterDialogState extends State<FilterDialog> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
+                          child: DropdownButton<CountryModel>(
                             isExpanded: true,
                             hint: const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -147,23 +146,23 @@ class _FilterDialogState extends State<FilterDialog> {
                                 textAlign: TextAlign.right,
                               ),
                             ),
-                            value: "",
+                            value: viewModel.selectedCountrySignal.value,
                             icon: const Padding(
                               padding: EdgeInsets.only(left: 16),
                               child: Icon(Icons.keyboard_arrow_down,color: AppColors.primary,),
                             ),
                             elevation: 16,
                             style: const TextStyle(color: Colors.black),
-                            onChanged: (String? newValue) {
-                              viewModel.onCountryChanged(CountryModel(id: 0, name: newValue??""));
+                            onChanged: (CountryModel? newValue) {
+                              viewModel.onCountryChanged(newValue);
                             },
-                            items: <String>['السعودية', 'الإمارات', 'قطر', 'الكويت']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
+                            items: viewModel.countriesSignal.value
+                                .map<DropdownMenuItem<CountryModel>>((CountryModel value) {
+                              return DropdownMenuItem<CountryModel>(
                                 value: value,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                                  child: Text(value),
+                                  child: Text(value.name),
                                 ),
                               );
                             }).toList(),

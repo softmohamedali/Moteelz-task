@@ -116,7 +116,7 @@ class WalletScreen extends StatelessWidget {
                 price: item.price,
                 features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
                 onTap: (){
-                  Get.to(()=> DetailsPaymentStepsScreen());
+                  Get.to(()=> DetailsPaymentStepsScreen(walletId: item.id,));
                 },
               );
             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signals/signals.dart';
+import 'package:signals/signals_flutter.dart';
 
 import '../../../core/di/injection.dart';
 import '../../../data/dto/wallet_model.dart';
@@ -7,8 +8,8 @@ import '../../../domain/usecases/get_countries.dart';
 import '../../../domain/usecases/get_wallets.dart';
 
 class WalletListViewModel extends ChangeNotifier {
-  final minPriceController = TextEditingController();
-  final maxPriceController = TextEditingController();
+  final  minPriceController = signal<double>(0);
+  final  maxPriceController = signal<double>(10000);
   // State variables
   final walletsSignal = signal<List<WalletModel>>([]);
   final countriesSignal = signal<List<CountryModel>>([]);
@@ -68,16 +69,17 @@ class WalletListViewModel extends ChangeNotifier {
       },
           (data) {
         countriesSignal.value = data;
+        selectedCountrySignal.value=countriesSignal.value[0];
       },
     );
   }
 
   void applyFilters() {
-    final minPrice = minPriceController.text.isNotEmpty
-        ? double.tryParse(minPriceController.text)
+    final minPrice = minPriceController.value!=0
+        ? minPriceController.value
         : null;
-    final maxPrice = maxPriceController.text.isNotEmpty
-        ? double.tryParse(maxPriceController.text)
+    final maxPrice = maxPriceController.value!=0
+        ? maxPriceController.value
         : null;
 
     fetchWallets(
@@ -90,8 +92,8 @@ class WalletListViewModel extends ChangeNotifier {
   }
 
   void resetFilters() {
-    minPriceController.clear();
-    maxPriceController.clear();
+    minPriceController.value=0;
+    maxPriceController.value=0;
     selectedCountrySignal.value = null;
     fetchWallets();
     isFilterAppliedSignal.value = false;
