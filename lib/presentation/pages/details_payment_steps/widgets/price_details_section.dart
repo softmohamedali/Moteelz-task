@@ -28,7 +28,10 @@ class PriceDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     double  price=(double.parse(dayOption.days))*(wallet.price);
     final discountAmount = price * discount;
-    final finalPrice = price - discountAmount;
+    final finalPrice = discount > 0?
+    ((price+calculateTaxPrice(price,taxPercent:wallet.taxPercent))-discountAmount)
+    :
+    price+calculateTaxPrice(price,taxPercent:wallet.taxPercent);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -66,9 +69,9 @@ class PriceDetailsSection extends StatelessWidget {
               _buildPriceRow(
                   'المبلغ الإجمالي',
                   discount > 0?
-                  '${(price+calculateTaxPrice(price,taxPercent:wallet.taxPercent))-discountAmount} ر.س'
+                  '${finalPrice} ر.س'
                       :
-                  '${price+calculateTaxPrice(price,taxPercent:wallet.taxPercent)} ر.س',
+                  '${finalPrice} ر.س',
                   isTotal: true
               ),
             ],

@@ -26,10 +26,11 @@ class WalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = walletListViewModelRef.bind(context, () => walletListViewModel);
     return Scaffold(
+      extendBodyBehindAppBar: true, // AppBar extends behind the status bar
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: 80,
         title: SearchTextField(
@@ -125,29 +126,31 @@ class WalletScreen extends StatelessWidget {
             );
           }
 
-          return Padding(
-            padding:  const EdgeInsets.all(16.0),
-            child: ListView.separated(
-              physics: const ClampingScrollPhysics(),
-              itemCount: searchResult.length,
-              separatorBuilder: (context, index) =>  Container(
-                height:AppDimens.h16,
+          return SafeArea(
+            child: Padding(
+              padding:  const EdgeInsets.all(16.0),
+              child: ListView.separated(
+                physics: const ClampingScrollPhysics(),
+                itemCount: searchResult.length,
+                separatorBuilder: (context, index) =>  Container(
+                  height:AppDimens.h16,
+                ),
+                itemBuilder: (context, index) {
+                  final item = searchResult[index];
+                  return WalletItem(
+                    cardImgUrl: item.walletImage,
+                    catigory: item.walletCategory.name,
+                    validThru: item.expiryDate.toString(),
+                    daysNumber: item.availableDays.toString(),
+                    name: item.name,
+                    price: item.price,
+                    features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
+                    onTap: (){
+                      Get.to(()=> DetailsPaymentStepsScreen(walletId: item.id,));
+                    },
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                final item = searchResult[index];
-                return WalletItem(
-                  cardImgUrl: item.walletImage,
-                  catigory: item.walletCategory.name,
-                  validThru: item.expiryDate.toString(),
-                  daysNumber: item.availableDays.toString(),
-                  name: item.name,
-                  price: item.price,
-                  features: item.featuresFavorites.map((item)=> item.name.toString()).toList(),
-                  onTap: (){
-                    Get.to(()=> DetailsPaymentStepsScreen(walletId: item.id,));
-                  },
-                );
-              },
             ),
           );
         }else{
