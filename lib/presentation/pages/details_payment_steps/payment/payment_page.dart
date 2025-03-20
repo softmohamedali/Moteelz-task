@@ -60,8 +60,7 @@ class PaymentScreen extends StatelessWidget {
                             child: MyTextField(
                               controller: viewModel.couponCode,
                               hintText: 'ادخل كوبون الخصم',
-                              // enabled: !viewModel.isValidatingCoupon.value && !viewModel.hasCoupon.value,
-                              // errorText: viewModel.couponErrorMessage.value,
+                              enabled: !viewModel.isValidatingCoupon.value && !viewModel.hasCoupon.value,
                             ),
                           ),
                           const SizedBox(width: 8),

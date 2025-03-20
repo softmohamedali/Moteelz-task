@@ -12,42 +12,53 @@ class MyTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextInputType keyboardType;
   final bool obscureText;
-  final Function(String? value)? validator;
+  final String? Function(String?)? validator;
+  final bool enabled;
+  final String? errorText;
 
   const MyTextField({
     super.key,
     required this.controller,
     this.hintText = 'ابحث عن بطاقة',
     this.onChanged,
-    this.keyboardType=TextInputType.none,
-    this.obscureText=false,
+    this.keyboardType = TextInputType.none,
+    this.obscureText = false,
     this.validator,
+    this.enabled = true,
+    this.errorText,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55,
+      height: errorText != null ? 80 : 55, // Increase height when error is shown
       child: MoteelzContainer(
-        child: TextField(
+        child: TextFormField(
           controller: controller,
           keyboardType: keyboardType,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.right,
           style: const TextStyle(
               color: AppColors.primry_gray_txt,
-            fontFamily: AppFont.fontRegular
+              fontFamily: AppFont.fontRegular
           ),
           onChanged: onChanged,
           obscureText: obscureText,
+          validator: validator,
+          enabled: enabled,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(
-              color: AppColors.primry_gray_txt,
+                color: AppColors.primry_gray_txt,
                 fontFamily: AppFont.fontRegular
             ),
             hintTextDirection: TextDirection.rtl,
             border: InputBorder.none,
+            errorText: errorText,
+            errorStyle: const TextStyle(
+              color: Colors.red,
+              fontFamily: AppFont.fontRegular,
+            ),
           ),
         ),
       ),

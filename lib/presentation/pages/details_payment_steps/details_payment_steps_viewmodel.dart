@@ -153,33 +153,12 @@ class DetailsPaymentStepsViewmodel extends ChangeNotifier {
     if (value == null || value.isEmpty) {
       return "الرجاء إدخال رقم البطاقة";
     }
-    final cleanNumber = value.replaceAll(" ", "");
-    if (cleanNumber.length != 16 || !RegExp(r'^[0-9]+$').hasMatch(cleanNumber)) {
-      return "رقم البطاقة غير صحيح";
-    }
-
     return null;
   }
 
   String? validateCardExpiry(String? value) {
     if (value == null || value.isEmpty) {
       return "الرجاء إدخال تاريخ انتهاء الصلاحية";
-    }
-
-    if (!RegExp(r'^(0[1-9]|1[0-2])/([0-9]{2})$').hasMatch(value)) {
-      return "التاريخ غير صحيح (MM/YY)";
-    }
-
-    final parts = value.split('/');
-    final month = int.tryParse(parts[0]);
-    final year = int.tryParse("20${parts[1]}");
-
-    final now = DateTime.now();
-    final currentYear = now.year;
-    final currentMonth = now.month;
-
-    if (year! < currentYear || (year == currentYear && month! < currentMonth)) {
-      return "البطاقة منتهية الصلاحية";
     }
 
     return null;
@@ -189,19 +168,12 @@ class DetailsPaymentStepsViewmodel extends ChangeNotifier {
     if (value == null || value.isEmpty) {
       return "الرجاء إدخال رمز الأمان";
     }
-    if (value.length < 3 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
-      return "رمز الأمان غير صحيح";
-    }
     return null;
   }
 
   String? validateCardHolderName(String? value) {
     if (value == null || value.isEmpty) {
       return "الرجاء إدخال اسم حامل البطاقة";
-    }
-
-    if (value.length < 3) {
-      return "الاسم قصير جدًا";
     }
 
     return null;
