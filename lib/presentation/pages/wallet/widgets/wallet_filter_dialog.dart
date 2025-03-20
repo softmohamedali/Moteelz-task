@@ -33,21 +33,20 @@ class _FilterDialogState extends State<FilterDialog> {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Container(
-          padding:  EdgeInsets.only(
-              top: AppDimens.p16,
+          padding: EdgeInsets.only(
+            top: AppDimens.p16,
           ),
           width: double.infinity,
-          child: Watch((context){
+          child: Watch((context) {
             final countries = viewModel.countriesSignal.value;
             final selectedCountry = viewModel.selectedCountrySignal.value;
-
 
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:  EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     right: AppDimens.p18,
                     left: AppDimens.p18,
                   ),
@@ -85,15 +84,15 @@ class _FilterDialogState extends State<FilterDialog> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           SizedBox(
-                            width: Get.width*0.3,
+                            width: Get.width * 0.3,
                             child: TextBorder(
-                              value: 'رس ${viewModel.minPriceController}',
+                              value: 'رس ${viewModel.minPriceController.value}',
                             ),
                           ),
                           SizedBox(
-                            width: Get.width*0.3,
+                            width: Get.width * 0.3,
                             child: TextBorder(
-                              value: 'رس ${viewModel.maxPriceController}',
+                              value: 'رس ${viewModel.maxPriceController.value}',
                             ),
                           ),
                         ],
@@ -111,15 +110,15 @@ class _FilterDialogState extends State<FilterDialog> {
                         ),
                         child: RangeSlider(
                           values: RangeValues(
-                          viewModel.minPriceController.value,
-                            viewModel.maxPriceController.value
+                              viewModel.minPriceController.value,
+                              viewModel.maxPriceController.value
                           ),
                           min: 0,
                           max: 10000,
                           divisions: 100,
                           onChanged: (RangeValues values) {
-                            viewModel.minPriceController.value=values.start;
-                            viewModel.maxPriceController.value=values.end;
+                            viewModel.minPriceController.value = values.start;
+                            viewModel.maxPriceController.value = values.end;
                           },
                         ),
                       ),
@@ -149,7 +148,7 @@ class _FilterDialogState extends State<FilterDialog> {
                             value: viewModel.selectedCountrySignal.value,
                             icon: const Padding(
                               padding: EdgeInsets.only(left: 16),
-                              child: Icon(Icons.keyboard_arrow_down,color: AppColors.primary,),
+                              child: Icon(Icons.keyboard_arrow_down, color: AppColors.primary,),
                             ),
                             elevation: 16,
                             style: const TextStyle(color: Colors.black),
@@ -174,13 +173,15 @@ class _FilterDialogState extends State<FilterDialog> {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height*0.2,
+                  height: Get.height * 0.2,
                 ),
                 SizedBox(
                   width: double.infinity,
                   height: AppDimens.btnH60,
                   child: ElevatedButton(
                     onPressed: () {
+                      // Apply filters before closing the dialog
+                      viewModel.applyFilters();
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
@@ -192,11 +193,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         ),
                       ),
                     ),
-                    child:  MText(
+                    child: const MText(
                       value: 'بحث',
                       fontSize: AppDimens.s16,
                       color: Colors.white,
-
                     ),
                   ),
                 ),
