@@ -18,8 +18,8 @@ class ExhibitionCard extends StatelessWidget {
           height: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16 * scale),
-            color: Colors.blue[700],
           ),
+          clipBehavior: Clip.hardEdge,
           child: Image.network(
             img,
             loadingBuilder: (context, child, loadingProgress) {

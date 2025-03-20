@@ -5,13 +5,15 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:moteelz/core/ui/app_colors.dart';
 import 'package:moteelz/presentation/pages/wallet/wallet_page.dart';
 
+import 'core/di/injection.dart';
+
 void main() {
   // di.setupDependencies();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   ErrorWidget.builder = ContextPlus.errorWidgetBuilder(ErrorWidget.builder);
   FlutterError.onError = ContextPlus.onError(FlutterError.onError);
-
+  initDi();
   runApp(
     ContextPlus.root(child: MyApp(),),
   );

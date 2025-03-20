@@ -16,8 +16,8 @@ dependencies:
   signals: ^4.0.0
   dio: ^5.0.0
   retrofit: ^4.0.0
-  freezed_annotation: ^2.0.0
-  json_annotation: ^4.8.1
+  freezed_annotation:
+  json_annotation:
   context_plus:
   dartz:
   flutter_native_splash:
@@ -29,11 +29,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  build_runner: ^2.0.0
-  freezed: ^2.0.0
+  build_runner:
+  freezed:
   retrofit_generator:
   dotted_border:
   readmore:
+  json_serializable:
 
 flutter:
 

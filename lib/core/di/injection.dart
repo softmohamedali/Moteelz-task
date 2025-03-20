@@ -10,7 +10,7 @@ import '../../domain/usecases/get_wallets.dart';
 
 final sl = GetIt.instance;
 
-Future<void> init() async {
+Future<void> initDi() async {
   // External
   sl.registerLazySingleton(() {
     final dio = Dio();
