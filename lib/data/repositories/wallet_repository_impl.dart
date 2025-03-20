@@ -30,7 +30,8 @@ class WalletRepositoryImpl implements WalletRepository {
       return Right(response.data);
     } on DioException catch (e) {
       return Left(ServerFailure(e.message ?? 'Server error'));
-    } catch (e) {
+    } catch (e,s) {
+      print("Error-->$e-----$s");
       return Left(GeneralFailure(e.toString()));
     }
   }
@@ -42,7 +43,8 @@ class WalletRepositoryImpl implements WalletRepository {
       return Right(response.data);
     } on DioException catch (e) {
       return Left(ServerFailure(e.message ?? 'Server error'));
-    } catch (e) {
+    } catch (e,s) {
+      print("Error-->$e-----$s");
       return Left(GeneralFailure(e.toString()));
     }
   }
@@ -54,7 +56,8 @@ class WalletRepositoryImpl implements WalletRepository {
       return Right(response.data);
     } on DioException catch (e) {
       return Left(ServerFailure(e.message ?? 'Server error'));
-    } catch (e) {
+    } catch (e,s) {
+      print("Error-->$e-----$s");
       return Left(GeneralFailure(e.toString()));
     }
   }
