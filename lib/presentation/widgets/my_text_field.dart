@@ -19,7 +19,7 @@ class MyTextField extends StatelessWidget {
     required this.controller,
     this.hintText = 'ابحث عن بطاقة',
     this.onChanged,
-    this.keyboardType = TextInputType.none,
+    this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.enabled = true,
   });
