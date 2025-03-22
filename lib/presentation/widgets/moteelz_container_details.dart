@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../core/ui/app_colors.dart';
 import '../../core/ui/app_dimen.dart';
@@ -19,9 +20,9 @@ class MoteelzContainer extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(padding),
         decoration: BoxDecoration(
-            color: AppColors.back_ground_card_gray,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(width: 0.5,color: AppColors.gray_border)
+            border: Border.all(width: 0.2,color: AppColors.gray_border)
         ),
         child: child
     );

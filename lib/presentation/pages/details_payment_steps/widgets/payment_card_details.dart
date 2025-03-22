@@ -28,8 +28,8 @@ class PaymentCard extends StatelessWidget {
         textDirection: TextDirection.rtl,
         children: [
           Container(
-              width: ResponsiveSize.cardWidth(context),
-              height: ResponsiveSize.cardHeight(context),
+              width: ResponsiveSize.cardWidth(context,percentage: 0.30),
+              height: ResponsiveSize.cardHeight(context,percentage: 0.08),
               child: ExhibitionCard(img: wallet.walletImage,)
           ),
           SizedBox(width: AppDimens.h8,),
@@ -42,7 +42,7 @@ class PaymentCard extends StatelessWidget {
                     Container(
                       padding:  EdgeInsets.symmetric(horizontal: 4, ),
                       decoration: BoxDecoration(
-                        color: AppColors.sec_pinc_txt.withAlpha(50),
+                        color: AppColors.sec_pinc_txt.withAlpha(40),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child:  Text(

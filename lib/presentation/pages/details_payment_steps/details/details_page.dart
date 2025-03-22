@@ -26,7 +26,7 @@ class DetailsScreen extends StatelessWidget {
     final viewModel = detailsPaymentViewmodelRef.bindValue(context,detailsPaymentStepsViewModel);
     return Scaffold(
 
-      backgroundColor: AppColors.back_ground_gray,
+      backgroundColor: AppColors.background,
       body:  Watch((context){
         final isLoading = viewModel.isLoadingSignal.value;
         final error = viewModel.errorSignal.value;
@@ -73,7 +73,7 @@ class DetailsScreen extends StatelessWidget {
                             children: [
                               MText(
                                 value: wallet!.name,
-                                fontSize: AppDimens.s16,
+                                fontSize: AppDimens.s20,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.thr_violet_txt,
                                 textAlign: TextAlign.right,
@@ -99,7 +99,7 @@ class DetailsScreen extends StatelessWidget {
                       SizedBox(height: 24),
                       const MText(
                         value: ': اختر عدد الليالي',
-                        fontSize: AppDimens.s14,
+                        fontSize: AppDimens.s16,
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.right,
                         color: AppColors.thr_violet_txt,

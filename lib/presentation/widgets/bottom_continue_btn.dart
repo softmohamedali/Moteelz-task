@@ -9,12 +9,14 @@ import 'm_text.dart';
 
 class ContinueButton extends StatelessWidget {
   final String text;
+  final bool showIcon;
   final GestureTapCallback? onTap;
 
   const ContinueButton({
     Key? key,
     required this.text,
-    this.onTap
+    this.onTap,
+    this.showIcon=true
   }) : super(key: key);
 
   @override
@@ -29,11 +31,11 @@ class ContinueButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
+              showIcon?SvgPicture.asset(
                 AppAssets.backArrow,
                 color: Colors.white,
-              ),
-              SizedBox(width: AppDimens.h12),
+              ):SizedBox(),
+              SizedBox(width: showIcon?AppDimens.h12:0),
               MText(
                 value: text,
                 fontSize: 16,

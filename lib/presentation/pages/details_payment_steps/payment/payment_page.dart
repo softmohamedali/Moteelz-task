@@ -26,7 +26,7 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = detailsPaymentViewmodelRef.bindValue(context, detailsPaymentStepsViewModel);
     return Scaffold(
-      backgroundColor: AppColors.back_ground_gray,
+      backgroundColor: AppColors.background,
       body: Watch((context){
         return Column(
           children: [
@@ -232,6 +232,7 @@ class PaymentScreen extends StatelessWidget {
             ),
             ContinueButton(
               text: viewModel.isSubmitting.value ? 'جاري الدفع...' : 'إدفع الآن',
+              showIcon: false,
               onTap: (){
                 viewModel.processPayment();
               },

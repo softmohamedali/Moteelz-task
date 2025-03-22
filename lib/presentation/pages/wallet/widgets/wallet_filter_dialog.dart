@@ -86,13 +86,13 @@ class _FilterDialogState extends State<FilterDialog> {
                           SizedBox(
                             width: Get.width * 0.3,
                             child: TextBorder(
-                              value: 'رس ${viewModel.minPriceController.value}',
+                              value: '${viewModel.minPriceController.value.toStringAsFixed(2)} رس',
                             ),
                           ),
                           SizedBox(
                             width: Get.width * 0.3,
                             child: TextBorder(
-                              value: 'رس ${viewModel.maxPriceController.value}',
+                              value: '${viewModel.maxPriceController.value.toStringAsFixed(2)} رس',
                             ),
                           ),
                         ],
@@ -100,9 +100,8 @@ class _FilterDialogState extends State<FilterDialog> {
                       const SizedBox(height: 8),
                       SliderTheme(
                         data: SliderTheme.of(context).copyWith(
-                          activeTrackColor: Colors.deepPurple[400],
-                          inactiveTrackColor: Colors.deepPurple[100],
-                          thumbColor: Colors.deepPurple[400],
+                          activeTrackColor: AppColors.primary,
+                          thumbColor: AppColors.primary,
                           overlayColor: Colors.deepPurple.withOpacity(0.1),
                           rangeThumbShape: const RoundRangeSliderThumbShape(
                             enabledThumbRadius: 8.0,
@@ -143,6 +142,7 @@ class _FilterDialogState extends State<FilterDialog> {
                                 value: "اختيار",
                                 color: AppColors.primry_gray_txt,
                                 textAlign: TextAlign.right,
+                                fontSize:AppDimens.s18
                               ),
                             ),
                             value: viewModel.selectedCountrySignal.value,
@@ -195,7 +195,7 @@ class _FilterDialogState extends State<FilterDialog> {
                     ),
                     child: const MText(
                       value: 'بحث',
-                      fontSize: AppDimens.s16,
+                      fontSize: AppDimens.s18,
                       color: Colors.white,
                     ),
                   ),

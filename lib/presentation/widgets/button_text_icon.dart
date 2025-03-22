@@ -23,14 +23,15 @@ class FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: AppDimens.p10, vertical: AppDimens.p8),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(24),
-        ),
+    return Container(
+      padding:  const EdgeInsets.symmetric(horizontal: AppDimens.p30, vertical: AppDimens.p20),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.white)
+      ),
+      child: GestureDetector(
+        onTap: onPressed,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -38,7 +39,7 @@ class FilterButton extends StatelessWidget {
               value: text,
                 color: textColor,
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: AppDimens.s20,
 
             ),
             const SizedBox(width: 8),

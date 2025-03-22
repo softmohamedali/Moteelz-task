@@ -67,18 +67,18 @@ class NightOption extends StatelessWidget {
           color:AppColors.primary.withAlpha(50) ,
         ),
         child: DottedBorder(
-          borderType: BorderType.RRect,  // You can use BorderType.Circle or BorderType.Rect
+          borderType: BorderType.RRect,
           radius: Radius.circular(12),
-          dashPattern: [3, 3],  // Adjust dash pattern [dash length, space length]
+          dashPattern: [3, 3],
           strokeWidth: 1,
-          color: AppColors.primary,  // Border color
+          color: AppColors.primary,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             alignment: Alignment.center,
             child: MText(
               value: '$nights ليالي',
               color:  AppColors.primary ,
-              fontSize: AppDimens.s12,
+              fontSize: AppDimens.s14,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -86,19 +86,22 @@ class NightOption extends StatelessWidget {
       )
           :
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.p12, vertical: 4),
         decoration: BoxDecoration(
           color: isSelected ? Colors.deepPurple.withOpacity(0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color:  Colors.grey.shade300,
+            color:  Colors.grey.shade400,
             width: 1,
           ),
         ),
-        child: MText(
-          value: '$nights ليلة',
-          color:  AppColors.dark_gray_txt,
-          fontWeight:  FontWeight.normal,
+        child: Center(
+          child: MText(
+            value: '$nights ليلة',
+            color:  AppColors.dark_gray_txt,
+            fontWeight:  FontWeight.bold,
+            fontSize: AppDimens.s14,
+          ),
         ),
       ),
     );

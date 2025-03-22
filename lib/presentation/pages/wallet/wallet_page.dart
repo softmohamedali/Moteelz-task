@@ -27,7 +27,7 @@ class WalletScreen extends StatelessWidget {
     final viewModel = walletListViewModelRef.bind(context, () => walletListViewModel);
     return Scaffold(
       extendBodyBehindAppBar: true, // AppBar extends behind the status bar
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
@@ -38,24 +38,17 @@ class WalletScreen extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation:FloatingActionButtonLocation.startFloat,
-      floatingActionButton: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: FilterButton(
-          text: 'التصفية',
-          svgString: AppAssets.filter,
-          onPressed: (){
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const FilterDialog();
-              },
-            );
-          },
-        ),
+      floatingActionButton: FilterButton(
+        text: 'التصفية',
+        svgString: AppAssets.filter,
+        onPressed: (){
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const FilterDialog();
+            },
+          );
+        },
       ),
       body: Watch((context){
         final wallets = viewModel.walletsSignal.value;
@@ -127,7 +120,7 @@ class WalletScreen extends StatelessWidget {
           }
 
           return SafeArea(
-            child: Padding(
+            child: Container(
               padding:  const EdgeInsets.all(16.0),
               child: ListView.separated(
                 physics: const ClampingScrollPhysics(),

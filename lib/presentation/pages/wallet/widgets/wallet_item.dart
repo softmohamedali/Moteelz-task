@@ -38,7 +38,7 @@ class WalletItem extends StatelessWidget {
       onTap: onTap,
       child: Card(
         color: Colors.white,
-        elevation: 4, // Adjust shadow depth
+        elevation: 2, // Adjust shadow depth
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30), // Border radius
         ),
@@ -58,9 +58,9 @@ class WalletItem extends StatelessWidget {
                 children: [
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                     decoration: BoxDecoration(
-                      color: AppColors.sec_pinc_txt.withAlpha(50),
+                      color: AppColors.sec_pinc_txt.withAlpha(40),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: MText(
